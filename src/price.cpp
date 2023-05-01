@@ -4,13 +4,13 @@
 
 Price::Price(unsigned zlotys, unsigned grosze) {
     setZlotys(zlotys);
-    setGorsze(grosze);
+    setGrosze(grosze);
 }
 
 void Price::setZlotys(const unsigned newZlotys) {
     zlotys = newZlotys;
 }
-void Price::setGorsze(const unsigned newGrosze) {
+void Price::setGrosze(const unsigned newGrosze) {
     zlotys += newGrosze / 100;
     grosze = newGrosze % 100;
 }
@@ -23,7 +23,7 @@ unsigned Price::getGrosze() const {
 
 Price& Price::operator+=(const Price& secondPrice) {
     setZlotys(zlotys + secondPrice.zlotys);
-    setGorsze(grosze + secondPrice.grosze);
+    setGrosze(grosze + secondPrice.grosze);
     return *this;
 }
 Price Price::operator+(const Price& secondPrice) const {

@@ -10,7 +10,7 @@ private:
 public:
     Price(unsigned zlotys, unsigned grosze);
     void setZlotys(const unsigned newZlotys);
-    void setGorsze(const unsigned newGrosze);
+    void setGrosze(const unsigned newGrosze);
     unsigned getZlotys() const;
     unsigned getGrosze() const;
 
