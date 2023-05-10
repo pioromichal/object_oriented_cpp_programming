@@ -20,6 +20,10 @@ unsigned ShoppingItem::getNumberOfMedicines() const {
 	return numberOfMedicines;
 }
 
+void ShoppingItem::increaseNumberOfMedicines(unsigned number) {
+	numberOfMedicines += number;
+}
+
 bool ShoppingItem::operator==(const ShoppingItem& other) const {
 	return medicinePtr == other.medicinePtr && numberOfMedicines == other.numberOfMedicines;
 }

@@ -41,6 +41,15 @@ TEST_CASE("shopping item simple tests", "[shopping item]") {
 		Medicine2.setMedicinePtr(Syrup1);
 		CHECK(Medicine2 == ShoppingItem(Syrup1, 2));
 	}
+
+	SECTION("testing increasing  number of medicines") {
+		Medicine1.increaseNumberOfMedicines(6);
+		CHECK(Medicine1 == ShoppingItem(Capsules1, 9));
+		Medicine2.increaseNumberOfMedicines(4);
+		CHECK(Medicine2 == ShoppingItem(Tablets1, 6));
+		Medicine2.increaseNumberOfMedicines(2);
+		CHECK(Medicine2 == ShoppingItem(Tablets1, 8));
+	}
 }
 
 TEST_CASE("shopping list simple tests", "[shopping list]") {
@@ -96,4 +105,6 @@ TEST_CASE("shopping list simple tests", "[shopping list]") {
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine6});
 	MareksList.replaceMedicineInList(Tablets1, Tablets2);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine12});
+	MareksList.addMedicineToList(Capsules2, 6);
+	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules2, 9), Medicine8, Medicine9, Medicine10, Medicine11, Medicine12});
 }

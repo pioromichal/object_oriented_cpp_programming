@@ -14,6 +14,7 @@ public:
 	void setNumberOfMedicines(const unsigned newNumberOfMedicines);
 	std::shared_ptr<Medicine> getMedicinePtr() const;
 	unsigned getNumberOfMedicines() const;
+	void increaseNumberOfMedicines(unsigned number);
 
 	bool operator==(const ShoppingItem& other) const;
 	bool operator!=(const ShoppingItem& other) const;
