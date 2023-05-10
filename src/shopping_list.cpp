@@ -11,7 +11,7 @@ void ShoppingList::addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, u
 void ShoppingList::replaceMedicineInList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr) {
 	auto it = std::find_if(medicinesList.begin(), medicinesList.end(), [oldMedicinePtr](const ShoppingItem& medicine) {
 		return medicine.getMedicinePtr() == oldMedicinePtr;
-		})
+		});
 		if (it != medicinesList.end()) {
 			it->setMedicinePtr(newMedicinePtr);
 		}
