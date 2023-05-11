@@ -35,6 +35,8 @@ class Client {
 		Price calculateNettoPrice() const;
 		virtual Price calculateTax() const = 0;
 
+		void resetClientId();
+
 		virtual ~Client();
 };
 

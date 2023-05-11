@@ -56,4 +56,8 @@ Price Client::calculateNettoPrice() const {
 	return shoppingList.getTotalNettoPrice();
 }
 
+void Client::resetClientId() {
+	clientId = 1;
+}
+
 Client::~Client() {}
