@@ -7,10 +7,10 @@
 
 class IndividualClient : Client {
 private:
-	static const unsigned tax = 23;
+	static const unsigned taxPercentage = 23;
 public:
 	IndividualClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions);
-	Price calculateTax() override;
+	Price calculateTax() const override;
 };
 
 #endif

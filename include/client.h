@@ -21,11 +21,11 @@ class Client {
 		void setName(const std::string newName);
 		void setSurame(const std::string newSurame);
 		void setShoppingList(const ShoppingList& newShoppingList);
-		void setProbabilityOfActions(const float setProbabilityOfActions);
+		void setProbabilityOfActions(const float newProbabilityOfActions);
 
 		std::string getName() const;
 		std::string getSurame() const;
-		ShoppingList& getShoppingList() const;
+		const ShoppingList& getShoppingList() const;
 		float getProbabilityOfActions() const;
 
 		void replaceMedicineOnList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
