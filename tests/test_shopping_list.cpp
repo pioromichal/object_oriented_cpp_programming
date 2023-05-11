@@ -50,6 +50,11 @@ TEST_CASE("shopping item simple tests", "[shopping item]") {
 		Medicine2.increaseNumberOfMedicines(2);
 		CHECK(Medicine2 == ShoppingItem(Tablets1, 8));
 	}
+
+	SECTION("testing calculating netto price") {
+		CHECK(Medicine1.calculateTotalPrice() == Price(53, 49));
+		CHECK(Medicine2.calculateTotalPrice() == Price(56, 74));
+	}
 }
 
 TEST_CASE("shopping list simple tests", "[shopping list]") {
@@ -59,6 +64,7 @@ TEST_CASE("shopping list simple tests", "[shopping list]") {
 	std::shared_ptr<Medicine> Powders1 = std::make_shared<Powders>("Powders1", Affliction::Bump, ActiveSubstance::Omeprazole, 1000, Price(45, 55), 100, 20);
 	std::shared_ptr<Medicine> Syrup1 = std::make_shared<Syrup>("Syrup1", Affliction::Bellyache, ActiveSubstance::Sertraline, 500, Price(80, 00), 100, 500);
 	std::shared_ptr<Medicine> Tablets1 = std::make_shared<Tablets>("Tablets1", Affliction::Allergy, ActiveSubstance::Sertraline, 560, Price(27, 55), 100, 50);
+
 	std::shared_ptr<Medicine> Capsules2 = std::make_shared<Capsules>("Capsules2", Affliction::Backache, ActiveSubstance::Ibuprofen, 1200, Price(12, 59), 200, 20);
 	std::shared_ptr<Medicine> Drops2 = std::make_shared<Drops>("Drops2", Affliction::Poisoning, ActiveSubstance::Amoxicillin, 500, Price(24, 50), 200, 150);
 	std::shared_ptr<Medicine> Ointment2 = std::make_shared<Ointment>("Ointment2", Affliction::Cold, ActiveSubstance::Paracetamol, 600, Price(12, 50), 200, 300);
@@ -81,30 +87,63 @@ TEST_CASE("shopping list simple tests", "[shopping list]") {
 
 	ShoppingList MareksList;
 
+	CHECK(MareksList.getTotalNettoPrice() == Price(0, 0));
+
 	MareksList.addMedicineToList(Capsules1, 3);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1});
+	CHECK(MareksList.getTotalNettoPrice() == Price(53, 49));
+
 	MareksList.addMedicineToList(Drops1, 2);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2});
+	CHECK(MareksList.getTotalNettoPrice() == Price(104, 9));
+
 	MareksList.addMedicineToList(Ointment1, 3);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, Medicine3});
+	CHECK(MareksList.getTotalNettoPrice() == Price(202, 91));
+
 	MareksList.addMedicineToList(Powders1, 3);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, Medicine3, Medicine4});
+	CHECK(MareksList.getTotalNettoPrice() == Price(358, 67));
+
 	MareksList.addMedicineToList(Syrup1, 2);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, Medicine3, Medicine4, Medicine5});
+	CHECK(MareksList.getTotalNettoPrice() == Price(529, 87));
+
 	MareksList.addMedicineToList(Tablets1, 2);
 	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, Medicine3, Medicine4, Medicine5, Medicine6});
-	MareksList.replaceMedicineInList(Capsules1, Capsules2);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine2, Medicine3, Medicine4, Medicine5, Medicine6});
-	MareksList.replaceMedicineInList(Drops1, Drops2);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine3, Medicine4, Medicine5, Medicine6});
-	MareksList.replaceMedicineInList(Ointment1, Ointment2);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine4, Medicine5, Medicine6});
-	MareksList.replaceMedicineInList(Powders1, Powders2);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine5, Medicine6});
-	MareksList.replaceMedicineInList(Syrup1, Syrup2);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine6});
-	MareksList.replaceMedicineInList(Tablets1, Tablets2);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine12});
-	MareksList.addMedicineToList(Capsules2, 6);
-	CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules2, 9), Medicine8, Medicine9, Medicine10, Medicine11, Medicine12});
+	CHECK(MareksList.getTotalNettoPrice() == Price(586, 61));
+
+
+	SECTION("testing replacing items") {
+		MareksList.replaceMedicineInList(Capsules1, Capsules2);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine2, Medicine3, Medicine4, Medicine5, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(572, 75));
+
+		MareksList.replaceMedicineInList(Drops1, Drops2);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine3, Medicine4, Medicine5, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(576, 5));
+
+		MareksList.replaceMedicineInList(Ointment1, Ointment2);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine4, Medicine5, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(517, 73));
+
+		MareksList.replaceMedicineInList(Powders1, Powders2);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine5, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(487, 13));
+
+		MareksList.replaceMedicineInList(Syrup1, Syrup2);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(460, 37));
+
+		MareksList.replaceMedicineInList(Tablets1, Tablets2);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine12});
+		CHECK(MareksList.getTotalNettoPrice() == Price(441, 93));
+	}
+	SECTION("testing adding again same items") {
+		MareksList.addMedicineToList(Capsules1, 6);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules1, 9), Medicine2, Medicine3, Medicine4, Medicine5, Medicine6});
+
+		MareksList.addMedicineToList(Tablets1, 5);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules1, 9), Medicine2, Medicine3, Medicine4, Medicine5, ShoppingItem(Tablets1, 7)});
+	}
 }

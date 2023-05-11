@@ -24,6 +24,11 @@ void ShoppingItem::increaseNumberOfMedicines(unsigned number) {
 	numberOfMedicines += number;
 }
 
+Price ShoppingItem::calculateTotalPrice() const {
+	return medicinePtr->calculatePrice() * numberOfMedicines;
+}
+
+
 bool ShoppingItem::operator==(const ShoppingItem& other) const {
 	return medicinePtr == other.medicinePtr && numberOfMedicines == other.numberOfMedicines;
 }
