@@ -17,7 +17,7 @@ public:
 	void addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, unsigned newNumberOfMedicines);
 	void replaceMedicineInList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
 
-	const std::list<ShoppingItem>& getMedicinesList();
+	const std::list<ShoppingItem>& getMedicinesList() const;
 	Price getTotalNettoPrice() const;
 };
 #endif

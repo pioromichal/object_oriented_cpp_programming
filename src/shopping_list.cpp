@@ -31,7 +31,7 @@ void ShoppingList::replaceMedicineInList(std::shared_ptr<Medicine> oldMedicinePt
 		}
 }
 
-const std::list<ShoppingItem>& ShoppingList::getMedicinesList() {
+const std::list<ShoppingItem>& ShoppingList::getMedicinesList() const {
 	return medicinesList;
 }
 
