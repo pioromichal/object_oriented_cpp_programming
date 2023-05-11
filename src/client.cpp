@@ -1,7 +1,7 @@
 #include "../include/client.h"
 
 
-Client::Client(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions) : name(name), surname(surname), shoppingList(shoppingList) , probabilityOfActions(0.5) {
+Client::Client(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions) : id(clientId++),name(name), surname(surname), shoppingList(shoppingList) , probabilityOfActions(0.5) {
 	setProbabilityOfActions(probabilityOfActions);
 }
 

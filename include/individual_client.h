@@ -5,12 +5,12 @@
 
 #include <string>
 
-class IndividualClient : Client {
-private:
-	static const unsigned taxPercentage = 23;
-public:
-	IndividualClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions);
-	Price calculateTax() const override;
+class IndividualClient : public Client {
+	private:
+		static const unsigned taxPercentage = 23;
+	public:
+		IndividualClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions);
+		Price calculateTax() const override;
 };
 
 #endif

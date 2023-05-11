@@ -38,9 +38,4 @@ class Client {
 		virtual ~Client();
 };
 
-
-// w shopping list stworzyæ pole przechowuj¹ce total netto price i aktualizuj¹ce je przy ka¿dym dodwaniu lub zamienianiu produktu
-//
-
-
 #endif //PROI_23L_101_APTEKA_CLIENT_H
