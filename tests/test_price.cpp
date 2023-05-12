@@ -59,15 +59,32 @@ TEST_CASE("Price simple test", "[Price]") {
         CHECK(Price2.getZlotys() == 1346);
         CHECK(Price2.getGrosze() == 78);
     }
-    SECTION("adding two playlists") {
-        Price Price_3(0, 0);
-        Price_3 = Price1 + Price2;
+    SECTION("adding two Prices") {
+        Price Price3(0, 0);
+        Price3 = Price1 + Price2;
         CHECK(Price1.getZlotys() == 1345);
         CHECK(Price1.getGrosze() == 34);
         CHECK(Price2.getZlotys() == 1346);
         CHECK(Price2.getGrosze() == 78);
+        CHECK(Price3.getZlotys() == 2692);
+        CHECK(Price3.getGrosze() == 12);;
+    }
+    SECTION("substract from existing Price another") {
+        Price2 -= Price1;
         CHECK(Price1.getZlotys() == 1345);
-        CHECK(Price1.getGrosze() == 34);;
+        CHECK(Price1.getGrosze() == 34);
+        CHECK(Price2.getZlotys() == 1);
+        CHECK(Price2.getGrosze() == 44);
+    }
+    SECTION("substracting two Prices") {
+        Price Price3(0, 0);
+        Price3 = Price2 - Price1;
+        CHECK(Price1.getZlotys() == 1345);
+        CHECK(Price1.getGrosze() == 34);
+        CHECK(Price2.getZlotys() == 1346);
+        CHECK(Price2.getGrosze() == 78);
+        CHECK(Price3.getZlotys() == 1);
+        CHECK(Price3.getGrosze() == 44);
     }
     SECTION("multiplying by unsigned int value") {
         Price Price_3(0, 0);
