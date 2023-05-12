@@ -39,17 +39,19 @@ bool Inventory::isMedicineInMagazine(const std::shared_ptr<Medicine> &medicine) 
 }
 
 std::shared_ptr<Medicine> Inventory::findRandomMedicine() {
-    std::default_random_engine generator;
+    std::random_device rd;
+    std::mt19937 rng(rd());
     std::uniform_int_distribution<int> distributionAffliction(0,(int)Affliction::Count);
-    Affliction affliction = static_cast<Affliction>(distributionAffliction(generator));
+    auto affliction = static_cast<Affliction>(distributionAffliction(rng));
     return findRandomMedicine(affliction);
 }
 
 std::shared_ptr<Medicine> Inventory::findRandomMedicine(Affliction affliction) {
-    std::default_random_engine generator;
+    std::random_device rd;
+    std::mt19937 rng(rd());
     std::uniform_int_distribution<int> distributionMedicine(0,inventory[affliction]->size());
     auto it = inventory[affliction]->begin();
-    std::advance(it,distributionMedicine(generator));
+    std::advance(it,distributionMedicine(rng));
     return *it;
 }
 #ifdef TESTING_ENV
