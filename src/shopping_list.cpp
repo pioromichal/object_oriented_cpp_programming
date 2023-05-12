@@ -31,6 +31,10 @@ void ShoppingList::replaceMedicineInList(std::shared_ptr<Medicine> oldMedicinePt
 		}
 }
 
+unsigned ShoppingList::getListSize() const {
+	return medicinesList.size();
+}
+
 const std::list<ShoppingItem>& ShoppingList::getMedicinesList() const {
 	return medicinesList;
 }
