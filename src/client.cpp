@@ -24,6 +24,10 @@ void Client::setProbabilityOfActions(const float newProbabilityOfActions) {
 	}
 }
 
+unsigned Client::getId() const {
+	return id;
+}
+
 std::string Client::getName() const {
 	return name;
 }

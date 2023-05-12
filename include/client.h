@@ -23,6 +23,7 @@ class Client {
 		void setShoppingList(const ShoppingList& newShoppingList);
 		void setProbabilityOfActions(const float newProbabilityOfActions);
 
+		unsigned getId() const;
 		std::string getName() const;
 		std::string getSurame() const;
 		const ShoppingList& getShoppingList() const;
@@ -35,7 +36,7 @@ class Client {
 		Price calculateNettoPrice() const;
 		virtual Price calculateTax() const = 0;
 
-		void resetClientId();
+		static void resetClientId();
 
 		virtual ~Client();
 };
