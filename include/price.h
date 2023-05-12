@@ -8,6 +8,7 @@ private:
     unsigned zlotys;
     unsigned grosze;
 public:
+    Price();
     Price(unsigned zlotys, unsigned grosze);
     void setZlotys(const unsigned newZlotys);
     void setGrosze(const unsigned newGrosze);
@@ -16,6 +17,8 @@ public:
 
     Price& operator+=(const Price& secondPrice);
     Price operator+(const Price& secondPrice) const;
+    Price& operator-=(const Price& secondPrice);
+    Price operator-(const Price& secondPrice) const;
     Price operator*(const unsigned& multiplier) const;
     Price operator/(const unsigned& divider) const;
 
