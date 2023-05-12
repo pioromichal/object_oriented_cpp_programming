@@ -8,15 +8,27 @@
 class Inventory {
 private:
     std::map<Affliction,std::unique_ptr<std::set<std::shared_ptr<Medicine>> >> inventory;
-    //Jeśli lek byłby tworzony przy pomocy pliku i fileManagera
     void addMedicine(std::unique_ptr<Medicine>);
 public:
     Inventory();
+
     std::shared_ptr<Medicine> findSubstitute(const std::shared_ptr<Medicine>& medicine);
+
     void pickMedicine(const std::shared_ptr<Medicine>& medicine);
+
     bool isMedicineInMagazine(const std::shared_ptr<Medicine>& medicine) const;
+
     std::shared_ptr<Medicine> findRandomMedicine();
+
     std::shared_ptr<Medicine> findRandomMedicine(Affliction affliction);
+
+    int numberOfMedicines();
+
+    int numberOfMedicines(Affliction affliction);
+
+#ifdef TESTING_ENV
+    void addNewMedicine(std::shared_ptr<Medicine> medicine);
+#endif
 };
 
 
