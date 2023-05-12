@@ -2,6 +2,8 @@
 #include "../include/price.h"
 
 
+Price::Price() : zlotys(0), grosze(0) {}
+
 Price::Price(unsigned zlotys, unsigned grosze) {
     setZlotys(zlotys);
     setGrosze(grosze);
@@ -29,6 +31,21 @@ Price& Price::operator+=(const Price& secondPrice) {
 Price Price::operator+(const Price& secondPrice) const {
     Price newPrice = *this;
     newPrice += secondPrice;
+    return newPrice;
+}
+Price& Price::operator-=(const Price& secondPrice) {
+    zlotys -= secondPrice.zlotys;
+    if (grosze < secondPrice.grosze) {
+        zlotys -= 1;
+        grosze += (100 - secondPrice.grosze);
+    } else {
+        grosze -= secondPrice.grosze;
+    }
+    return *this;
+}
+Price Price::operator-(const Price& secondPrice) const {
+    Price newPrice = *this;
+    newPrice -= secondPrice;
     return newPrice;
 }
 Price Price::operator*(const unsigned& multiplier) const {

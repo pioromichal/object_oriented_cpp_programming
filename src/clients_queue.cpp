@@ -1,5 +1,32 @@
-//
-// Created by damia on 06.04.2023.
-//
-
 #include "../include/clients_queue.h"
+
+ClientsQueue::ClientsQueue() : clientsPtrsQueue(std::queue<std::unique_ptr<Client>> {}) {}
+
+void ClientsQueue::pushBusinessClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions) {
+	clientsPtrsQueue.push(std::make_unique<BusinessClient>(name, surname, shoppingList, probabilityOfActions));
+}
+
+void ClientsQueue::pushIndividualClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions) {
+	clientsPtrsQueue.push(std::make_unique<IndividualClient>(name, surname, shoppingList, probabilityOfActions));
+}
+
+std::unique_ptr<Client> ClientsQueue::popClient() {
+    if (clientsPtrsQueue.empty()) {
+        return nullptr;
+    }
+    std::unique_ptr<Client> clientPtr = std::move(clientsPtrsQueue.front());
+    clientsPtrsQueue.pop();
+    return clientPtr;
+}
+
+bool ClientsQueue::isEmpty() {
+    return clientsPtrsQueue.empty();
+}
+
+unsigned ClientsQueue::getLength() {
+    return clientsPtrsQueue.size();
+}
+
+const std::queue<std::unique_ptr<Client>>& ClientsQueue::getClientsPtrsQueue() const {
+    return clientsPtrsQueue;
+}
