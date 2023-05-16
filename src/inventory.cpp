@@ -34,9 +34,6 @@ void Inventory::pickMedicine(const std::shared_ptr<Medicine> &medicine) {
     }
 }
 
-bool Inventory::isMedicineInMagazine(const std::shared_ptr<Medicine> &medicine) const {
-    return medicine->getAmountInPharmacy()>0;
-}
 
 std::shared_ptr<Medicine> Inventory::findRandomMedicine() {
     std::random_device rd;
@@ -54,25 +51,20 @@ std::shared_ptr<Medicine> Inventory::findRandomMedicine(Affliction affliction) {
     std::advance(it,distributionMedicine(rng));
     return *it;
 }
-#ifdef TESTING_ENV
-void Inventory::addNewMedicine(std::shared_ptr<Medicine> medicine) {
-    Affliction affliction = medicine->getAfflication();
-    inventory[affliction]->insert(std::move(medicine));
+
+unsigned Inventory::howManyInMagazine(const std::shared_ptr<Medicine> &medicine) const {
+    return medicine->getAmountInPharmacy();
 }
 
-int Inventory::numberOfMedicines() {
-    char numberOfAfflictions = (char)Affliction::Count;
-    int result = 0;
-    for(char i = 0;i<numberOfAfflictions;i++){
-        result+= numberOfMedicines(static_cast<Affliction>(i));
+void Inventory::pickMedicine(const std::shared_ptr<Medicine> &medicine, int number) {
+    for (unsigned char i =0;i<number;i++){
+        medicine->operator--();
     }
-    return result;
 }
-
-int Inventory::numberOfMedicines(Affliction affliction) {
-    return inventory[affliction]->size();;
+bool Inventory::isMedicineInMagazine(const std::shared_ptr<Medicine> &medicine) const {
+    return medicine->getAmountInPharmacy()>0;
 }
+bool Inventory::isMedicineInMagazine(const std::shared_ptr<Medicine> &medicine, int number) const {
+    return medicine->getAmountInPharmacy()>number;
 
-
-
-#endif
+}

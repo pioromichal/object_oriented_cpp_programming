@@ -15,9 +15,10 @@ public:
     std::shared_ptr<Medicine> findSubstitute(const std::shared_ptr<Medicine>& medicine);
 
     void pickMedicine(const std::shared_ptr<Medicine>& medicine);
-
-    bool isMedicineInMagazine(const std::shared_ptr<Medicine>& medicine) const;
-
+    void pickMedicine(const std::shared_ptr<Medicine>& medicine,int number);
+    bool isMedicineInMagazine(const std::shared_ptr<Medicine>& medicine, int number) const;
+    bool isMedicineInMagazine(const std::shared_ptr<Medicine> &medicine) const;
+    unsigned howManyInMagazine(const std::shared_ptr<Medicine>& medicine) const;
     std::shared_ptr<Medicine> findRandomMedicine();
 
     std::shared_ptr<Medicine> findRandomMedicine(Affliction affliction);
@@ -29,6 +30,7 @@ public:
 #ifdef TESTING_ENV
     void addNewMedicine(std::shared_ptr<Medicine> medicine);
 #endif
+
 };
 
 
