@@ -68,3 +68,22 @@ bool Inventory::isMedicineInMagazine(const std::shared_ptr<Medicine> &medicine, 
     return medicine->getAmountInPharmacy()>number;
 
 }
+
+int Inventory::numberOfMedicines() {
+    char numberOfAfflictions = (char) Affliction::Count;
+    int result = 0;
+    for (char i = 0; i < numberOfAfflictions; i++) {
+        result += numberOfMedicines(static_cast<Affliction>(i));
+    }
+    return result;
+}
+int Inventory::numberOfMedicines(Affliction affliction) {
+    return inventory[affliction]->size();;
+}
+
+#ifdef TESTING_ENV
+void Inventory::addNewMedicine(std::shared_ptr<Medicine> medicine) {
+    Affliction affliction = medicine->getAfflication();
+    inventory[affliction]->insert(std::move(medicine));
+}
+#endif
