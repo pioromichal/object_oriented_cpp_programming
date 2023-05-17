@@ -1,4 +1,4 @@
-#include "..\include\shopping_item.h"
+#include "../include/shopping_item.h"
 
 #include <iostream>
 
