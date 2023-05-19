@@ -1,6 +1,5 @@
 #include <iostream>
-
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+#include "include/file_manager.h"
+int main(int argc, char** argv) {
+    FileManager fileManager(argc,argv);
 }

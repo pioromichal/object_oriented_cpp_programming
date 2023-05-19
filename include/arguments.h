@@ -8,7 +8,6 @@ private:
 public:
     Arguments(int argc, char** argv);
     std::string pathToJSON();
-
 };
 
 

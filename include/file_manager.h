@@ -4,10 +4,13 @@
 
 #ifndef PROI_23L_101_APTEKA_FILE_MANAGER_H
 #define PROI_23L_101_APTEKA_FILE_MANAGER_H
-
+#include <nlohmann/json.hpp>
+#include "arguments.h"
+using json = nlohmann::json;
 
 class FileManager {
-
+public:
+    FileManager(int argc, char** argv);
 };
 
 
