@@ -19,11 +19,11 @@ std::unique_ptr<Client> ClientsQueue::popClient() {
     return clientPtr;
 }
 
-bool ClientsQueue::isEmpty() {
+bool ClientsQueue::isEmpty() const {
     return clientsPtrsQueue.empty();
 }
 
-unsigned ClientsQueue::getLength() {
+unsigned ClientsQueue::getLength() const {
     return clientsPtrsQueue.size();
 }
 

@@ -26,11 +26,14 @@ class Client {
 		unsigned getId() const;
 		std::string getName() const;
 		std::string getSurame() const;
-		const ShoppingList& getShoppingList() const;
+		ShoppingList& getShoppingList();
 		float getProbabilityOfActions() const;
+		std::list<ShoppingItem>& getMedicinesList();
 
 		void replaceMedicineOnList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
 		void addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, unsigned numberOfMedicines);
+		void removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr);
+		void changeMedcineAmount(std::shared_ptr<Medicine> medicinePtr, unsigned newNumberOfMedicines);
 
 		Price calculateBruttoPrice() const;
 		Price calculateNettoPrice() const;
