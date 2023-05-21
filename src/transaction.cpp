@@ -5,7 +5,12 @@
 
 Transaction::Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client>& supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr)
 	: pharmacyIneventory(pharmacyIneventory), supportedClientPtr(supportedClientPtr), currentCounterPtr(currentCounterPtr), remainingTime(0), nettoPrice(Price()), bruttoPrice(Price()), taxPrice(Price()) {
-	currentCounterPtr->setIsOccupied(true);
+	if (currentCounterPtr->isOccupied()) {
+	
+	}
+	else {
+		currentCounterPtr->setIsOccupied(true);
+	}
 
 	setStartingRemainingTime();
 
@@ -23,7 +28,7 @@ void Transaction::calculatePrices() {
 }
 
 void Transaction::setStartingRemainingTime() {
-	this->remainingTime = supportedClientPtr->getShoppingList().getListSize() / 3;
+	this->remainingTime = supportedClientPtr->getShoppingList().getListSize() / 3; //////////
 	if (supportedClientPtr->getShoppingList().getListSize() % 3 != 0) {
 		this->remainingTime++;
 	}
@@ -36,20 +41,7 @@ void Transaction::manageShoppingList() {
 		if (pharmacyIneventory.isMedicineInMagazine(medicineOnList.getMedicinePtr(), medicineOnList.getNumberOfMedicines())) {
 			pharmacyIneventory.pickMedicine(medicineOnList.getMedicinePtr(), medicineOnList.getNumberOfMedicines());
 		} else {
-			unsigned soldAmount = pharmacyIneventory.howManyInMagazine(medicineOnList.getMedicinePtr());
-			unsigned leftAmount = medicineOnList.getNumberOfMedicines() - soldAmount;
-
-			pharmacyIneventory.pickMedicine(medicineOnList.getMedicinePtr(), soldAmount);
-			supportedClientPtr->changeMedcineAmount(medicineOnList.getMedicinePtr(), soldAmount);
-
-			std::shared_ptr<Medicine> substitutePtr = pharmacyIneventory.findSubstitute(medicineOnList.getMedicinePtr());
-			if (substitutePtr == nullptr) {
-				//logger - nie sprzedano
-			} else {
-				//logger - sprzedano dowolne zamienniki
-				pharmacyIneventory.pickMedicine(substitutePtr, leftAmount);
-				supportedClientPtr->addMedicineToList(substitutePtr, leftAmount);
-			}
+			manageLackOfMedicine(medicineOnList);
 		}
 	}
 }
@@ -60,12 +52,40 @@ void Transaction::randomlyFindSubstitute(ShoppingItem& medicineOnList) {
 	std::bernoulli_distribution distribution(supportedClientPtr->getProbabilityOfActions());
 	bool findSubs = distribution(generator);
 	if (findSubs) {
+		this->remainingTime++;
 		std::shared_ptr<Medicine> substitutePtr = pharmacyIneventory.findSubstitute(medicineOnList.getMedicinePtr());
-		supportedClientPtr->replaceMedicineOnList(medicineOnList.getMedicinePtr(), substitutePtr);
-		medicineOnList.setMedicinePtr(substitutePtr);
-		//logger - znaleziono zamienniki
+		if (substitutePtr == nullptr) {
+			supportedClientPtr->removeMedicineFromList(substitutePtr);
+			//logger - nie znaleziono zamiennika
+		} else {
+			supportedClientPtr->replaceMedicineOnList(medicineOnList.getMedicinePtr(), substitutePtr);
+			medicineOnList.setMedicinePtr(substitutePtr);
+			//logger - znaleziono zamiennik
+		}
 	}
 }
+
+void Transaction::manageLackOfMedicine(ShoppingItem& medicineOnList) {
+	unsigned soldAmount = pharmacyIneventory.howManyInMagazine(medicineOnList.getMedicinePtr());
+	unsigned leftAmount = medicineOnList.getNumberOfMedicines() - soldAmount;
+
+	pharmacyIneventory.pickMedicine(medicineOnList.getMedicinePtr(), soldAmount);
+	supportedClientPtr->changeMedcineAmount(medicineOnList.getMedicinePtr(), soldAmount);
+
+	//loger - sprzedano jak¹œ iloœæ leków (opcjonalnie)
+
+	std::shared_ptr<Medicine> substitutePtr = pharmacyIneventory.findSubstitute(medicineOnList.getMedicinePtr());
+	if (substitutePtr == nullptr) {
+		supportedClientPtr->removeMedicineFromList(substitutePtr);
+		//logger - nie sprzedano
+	}
+	else {
+		//logger - sprzedano zamienniki
+		pharmacyIneventory.pickMedicine(substitutePtr, leftAmount);
+		supportedClientPtr->addMedicineToList(substitutePtr, leftAmount);
+	}
+}
+
 
 unsigned Transaction::getRemainingTime() const {
 	return remainingTime;
@@ -94,4 +114,5 @@ Transaction& Transaction::operator--() {
 
 Transaction::~Transaction() {
 	currentCounterPtr->setIsOccupied(false);
+	//logger - zakoñczono transakcjê
 }

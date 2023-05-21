@@ -20,6 +20,7 @@ class Transaction {
 		void setStartingRemainingTime();
 		void manageShoppingList();
 		void randomlyFindSubstitute(ShoppingItem& medicineOnList);
+		void manageLackOfMedicine(ShoppingItem& medicineOnList);
 
 	public:
 		Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client>& supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr);
