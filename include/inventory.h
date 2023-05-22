@@ -13,6 +13,7 @@ public:
     Inventory();
 
     std::shared_ptr<Medicine> findSubstitute(const std::shared_ptr<Medicine>& medicine);
+    std::shared_ptr<Medicine> findGeneralSubstitute(const std::shared_ptr<Medicine>& medicine);
 
     void pickMedicine(const std::shared_ptr<Medicine>& medicine);
     void pickMedicine(const std::shared_ptr<Medicine>& medicine,int number);
