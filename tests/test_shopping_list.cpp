@@ -10,6 +10,7 @@
 #include "../include/powders.h"
 #include "../include/syrup.h"
 #include "../include/tablets.h"
+#include "../include/exceptions.h"
 
 #include <memory>
 
@@ -115,35 +116,79 @@ TEST_CASE("shopping list simple tests", "[shopping list]") {
 
 
 	SECTION("testing replacing items") {
-		MareksList.replaceMedicineInList(Capsules1, Capsules2);
+		MareksList.replaceMedicineOnList(Capsules1, Capsules2);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine2, Medicine3, Medicine4, Medicine5, Medicine6});
 		CHECK(MareksList.getTotalNettoPrice() == Price(572, 75));
 
-		MareksList.replaceMedicineInList(Drops1, Drops2);
+		MareksList.replaceMedicineOnList(Drops1, Drops2);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine3, Medicine4, Medicine5, Medicine6});
 		CHECK(MareksList.getTotalNettoPrice() == Price(576, 5));
 
-		MareksList.replaceMedicineInList(Ointment1, Ointment2);
+		MareksList.replaceMedicineOnList(Ointment1, Ointment2);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine4, Medicine5, Medicine6});
 		CHECK(MareksList.getTotalNettoPrice() == Price(517, 73));
 
-		MareksList.replaceMedicineInList(Powders1, Powders2);
+		MareksList.replaceMedicineOnList(Powders1, Powders2);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine5, Medicine6});
 		CHECK(MareksList.getTotalNettoPrice() == Price(487, 13));
 
-		MareksList.replaceMedicineInList(Syrup1, Syrup2);
+		MareksList.replaceMedicineOnList(Syrup1, Syrup2);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine6});
 		CHECK(MareksList.getTotalNettoPrice() == Price(460, 37));
 
-		MareksList.replaceMedicineInList(Tablets1, Tablets2);
+		MareksList.replaceMedicineOnList(Tablets1, Tablets2);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine7, Medicine8, Medicine9, Medicine10, Medicine11, Medicine12});
 		CHECK(MareksList.getTotalNettoPrice() == Price(441, 93));
+
+		CHECK_THROWS_AS(MareksList.replaceMedicineOnList(Capsules1, Capsules2), Exceptions::MedicineDoesntExistOnList);
+
+		CHECK_THROWS_AS(MareksList.replaceMedicineOnList(Tablets1, Capsules1), Exceptions::MedicineDoesntExistOnList);
+
+		CHECK_THROWS_AS(MareksList.replaceMedicineOnList(Powders1, Tablets2), Exceptions::MedicineDoesntExistOnList);
 	}
+
 	SECTION("testing adding again same items") {
 		MareksList.addMedicineToList(Capsules1, 6);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules1, 9), Medicine2, Medicine3, Medicine4, Medicine5, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(693, 59));
 
 		MareksList.addMedicineToList(Tablets1, 5);
 		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules1, 9), Medicine2, Medicine3, Medicine4, Medicine5, ShoppingItem(Tablets1, 7)});
+		CHECK(MareksList.getTotalNettoPrice() == Price(835, 44));
+	}
+
+	SECTION("testing removing items from list") {
+		MareksList.removeMedicineFromList(Syrup1);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, Medicine3, Medicine4, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(415, 41));
+
+		MareksList.removeMedicineFromList(Drops1);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine3, Medicine4, Medicine6});
+		CHECK(MareksList.getTotalNettoPrice() == Price(364, 81));
+
+		CHECK_THROWS_AS(MareksList.removeMedicineFromList(Drops1), Exceptions::MedicineDoesntExistOnList);
+
+		CHECK_THROWS_AS(MareksList.removeMedicineFromList(Tablets2), Exceptions::MedicineDoesntExistOnList);
+	}
+	
+	SECTION("testing changing number of medicine on list") {
+		MareksList.changeMedcineAmount(Tablets1, 5);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, Medicine3, Medicine4, Medicine5, ShoppingItem(Tablets1, 5)});
+		CHECK(MareksList.getTotalNettoPrice() == Price(671, 72));
+
+		MareksList.changeMedcineAmount(Ointment1, 1);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, ShoppingItem(Ointment1, 1), Medicine4, Medicine5, ShoppingItem(Tablets1, 5)});
+		CHECK(MareksList.getTotalNettoPrice() == Price(605, 84));
+
+		MareksList.changeMedcineAmount(Powders1, 0);
+		CHECK(MareksList.getMedicinesList() == std::list<ShoppingItem>{Medicine1, Medicine2, ShoppingItem(Ointment1, 1), Medicine5, ShoppingItem(Tablets1, 5)});
+		CHECK(MareksList.getTotalNettoPrice() == Price(450, 8));
+
+		CHECK_THROWS_AS(MareksList.changeMedcineAmount(Ointment2, 7), Exceptions::MedicineDoesntExistOnList);
+
+		CHECK_THROWS_AS(MareksList.changeMedcineAmount(Capsules2, 1), Exceptions::MedicineDoesntExistOnList);
+
+		CHECK_THROWS_AS(MareksList.changeMedcineAmount(Powders2, 0), Exceptions::MedicineDoesntExistOnList);
+
 	}
 }

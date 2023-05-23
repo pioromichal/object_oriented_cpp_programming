@@ -15,8 +15,8 @@ class ClientsQueue {
 		void pushBusinessClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions);
 		void pushIndividualClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions);
 		std::unique_ptr<Client> popClient();
-		bool isEmpty();
-		unsigned getLength();
+		bool isEmpty() const;
+		unsigned getLength() const;
 		const std::queue<std::unique_ptr<Client>>& getClientsPtrsQueue() const;
 };
 
