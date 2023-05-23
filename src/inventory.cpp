@@ -25,7 +25,7 @@ std::shared_ptr<Medicine> Inventory::findSubstitute(const std::shared_ptr<Medici
             return medicinePtr;
         }
     }
-    throw std::invalid_argument("");
+    return nullptr;
 }
 
 void Inventory::pickMedicine(const std::shared_ptr<Medicine> &medicine) {
@@ -79,6 +79,16 @@ int Inventory::numberOfMedicines() {
 }
 int Inventory::numberOfMedicines(Affliction affliction) {
     return inventory[affliction]->size();;
+}
+
+std::shared_ptr<Medicine> Inventory::findGeneralSubstitute(const std::shared_ptr<Medicine> &medicine) {
+    Affliction affliction = medicine->getAfflication();
+    for(auto medicinePtr:*inventory[affliction]){
+        if(this->isMedicineInMagazine(medicinePtr)){
+            return medicinePtr;
+        }
+    }
+    return nullptr;
 }
 
 #ifdef TESTING_ENV
