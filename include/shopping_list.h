@@ -15,10 +15,12 @@ public:
 	ShoppingList();
 
 	void addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, unsigned newNumberOfMedicines);
-	void replaceMedicineInList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
+	void removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr);
+	void replaceMedicineOnList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
+	void changeMedcineAmount(std::shared_ptr<Medicine> medicinePtr, unsigned newNumberOfMedicines);
 
 	unsigned getListSize() const;
-	const std::list<ShoppingItem>& getMedicinesList() const;
+	std::list<ShoppingItem>& getMedicinesList();
 	Price getTotalNettoPrice() const;
 };
 #endif

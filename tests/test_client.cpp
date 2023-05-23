@@ -6,6 +6,7 @@
 #include "../include/individual_client.h"
 #include "../include/capsules.h"
 #include "../include/tablets.h"
+#include "../include/exceptions.h"
 
 
 TEST_CASE("Client simple tests", "[client]") {
@@ -30,6 +31,10 @@ TEST_CASE("Client simple tests", "[client]") {
 		CHECK(std::abs(JanK.getProbabilityOfActions() - 0.789) < 0.001);
 	}
 
+	SECTION("testing replacing not existed medicine on list") {
+		CHECK_THROWS_AS(JanK.replaceMedicineOnList(Tablets1, Capsules1), Exceptions::MedicineDoesntExistOnList);
+	}
+
 	SECTION("testing adding medicine to list") {
 		JanK.addMedicineToList(Tablets1, 5);
 		CHECK(JanK.getName() == "Jan");
@@ -38,12 +43,25 @@ TEST_CASE("Client simple tests", "[client]") {
 		CHECK(std::abs(JanK.getProbabilityOfActions() - 0.789) < 0.001);
 	}
 
-	SECTION("testing adding existing on list medicine to list") {
+	SECTION("testing adding existed on list medicine to list") {
 		JanK.addMedicineToList(Capsules1, 5);
 		CHECK(JanK.getName() == "Jan");
 		CHECK(JanK.getSurame() == "Kowalski");
 		CHECK(JanK.getShoppingList().getMedicinesList() == std::list<ShoppingItem>{ShoppingItem(Capsules1, 8)});
 		CHECK(std::abs(JanK.getProbabilityOfActions() - 0.789) < 0.001);
+	}
+
+
+	SECTION("testing removing existed medicine frome list") {
+		JanK.removeMedicineFromList(Capsules1);
+		CHECK(JanK.getName() == "Jan");
+		CHECK(JanK.getSurame() == "Kowalski");
+		CHECK(JanK.getShoppingList().getMedicinesList() == std::list<ShoppingItem>{});
+		CHECK(std::abs(JanK.getProbabilityOfActions() - 0.789) < 0.001);
+	}
+
+	SECTION("testing removing not existed medicine frome list") {
+		CHECK_THROWS_AS(JanK.removeMedicineFromList(Tablets1), Exceptions::MedicineDoesntExistOnList);
 	}
 
 	SECTION("testing calculating netto price ic") {
@@ -63,6 +81,7 @@ TEST_CASE("Client simple tests", "[client]") {
 		JanK.addMedicineToList(Tablets1, 5);
 		CHECK(JanK.calculateBruttoPrice() == Price(240, 26));
 	}
+
 	SECTION("testing business client") {
 		ShoppingList PiotrsList;
 		PiotrsList.addMedicineToList(Tablets1, 4);
