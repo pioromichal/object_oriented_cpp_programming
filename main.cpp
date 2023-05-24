@@ -1,6 +1,6 @@
 #include <iostream>
-
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+#include "include/file_manager.h"
+int main(int argc, char **argv) {
+    FileManager::simulationFromJson(argc,argv);
     return 0;
 }

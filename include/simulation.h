@@ -4,10 +4,14 @@
 
 #ifndef PROI_23L_101_APTEKA_SIMULATION_H
 #define PROI_23L_101_APTEKA_SIMULATION_H
-
+#include "pharmacy.h"
 
 class Simiulation {
-
+private:
+    int numberOfTurns;
+    Pharmacy pharmacy;
+public:
+    Simiulation();
 };
 
 

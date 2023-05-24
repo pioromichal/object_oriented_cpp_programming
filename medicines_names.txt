@@ -1,0 +1,766 @@
+Apap
+Nurofen
+Aspirin
+Losec
+Amotaks
+Sumamed
+Cipronex
+Metformax
+Norvasc
+Sortis
+Zocor
+Marevan
+Tritace
+Renitec
+Cozaar
+Zoloft
+Prozac
+Paxil
+Imodium
+Ventolin
+Prostamol
+Voltaren
+Claritine
+Zyrtec
+Rennie
+Maalox
+Spasmex
+No-Spa
+Clexane
+Novorapid
+Lantus
+Euthyrox
+Ventolin
+Seretide
+Flixotide
+Crestor
+Lipanthyl
+Zomig
+Maxigra
+Viagr
+Apap Extra
+Nurofen Forte
+Aspirin Cardio
+Losec MUPS
+Amotaks Dis
+Sumamed Forte
+Cipronex 500
+Metformax XR
+Norvasc 5
+Sortis 20
+Zocor Forte
+Marevan Plus
+Tritace Comp
+Renitec Plus
+Cozaar Comp
+Zoloft 50
+Prozac 20
+Paxil CR
+Imodium Plus
+Ventolin N
+Prostamol Uno
+Voltaren Emulgel
+Claritine Syrop
+Zyrtecset
+Rennie Soft
+Maalox Plus
+Spasmex Forte
+No-Spa Max
+Clexane Forte
+Novorapid FlexPen
+Lantus SoloStar
+Euthyrox 100
+Ventolin Inhaler
+Seretide Evohaler
+Flixotide Diskus
+Crestor 20
+Lipanthyl Supra
+Zomig Rapimelt
+Maxigra Go
+Viagra Connect
+Apap Junior
+Nurofen dla Dzieci
+Aspirin Protect
+Losec Control
+Amotaks 1g
+Sumamed Syrop
+Cipronex 250
+Metformax 500
+Norvasc 10
+Sortis 40
+Zocor 40
+Marevan Duo
+Tritace Plus
+Renitec HCT
+Cozaar Plus
+Zoloft 100
+Prozac 40
+Paxil 20
+Imodium Duo
+Ventolin Evohaler
+Prostamol Uno Forte
+Voltaren Max
+Claritine Rapid
+Zyrtec Allergy
+Rennie Fresh
+Maalox Max
+Spasmex Max
+No-Spa Maxi
+Clexane Duo
+Novorapid Penfill
+Lantus OptiSet
+Euthyrox 50
+Ventolin Syrop
+Seretide Accuhaler
+Flixotide Evohaler
+Crestor 10
+Lipanthyl 200
+Zomig Nasal
+Maxigra Classic
+Viagra Max
+Apap C
+Nurofen Express
+Aspirin Direct
+Losec Extra
+Amotaks Duo
+Sumamed Forte Syrop
+Cipronex 1000
+Metformax 1000
+Norvasc 2.5
+Sortis 10
+Zocor 20
+Marevan Duo Forte
+Tritace Plus 5
+Renitec HCT Forte
+Cozaar Plus Forte
+Zoloft 25
+Prozac 10
+Paxil 10
+Imodium Quick
+Ventolin Respirator
+Prostamol Uno Max
+Voltaren Max Forte
+Claritine Plus
+Zyrtec Od Azji
+Rennie Deflatine
+Maalox Mini
+Spasmex Max Forte
+No-Spa Relax
+Clexane Duo Forte
+Novorapid FlexTouch
+Lantus Solostar Penfill
+Euthyrox 75
+Ventolin Respirator Syrop
+Seretide MultiDiskus
+Flixotide Nebules
+Crestor 5
+Lipanthyl 100
+Zomig Rapid
+Maxigra Go Max
+Viagra Ultra
+Apap 500
+Nurofen Long
+Aspirin Complex
+Losec MUPS Extra
+Amotaks 500
+Sumamed 500
+Cipronex 750
+Metformax 850
+Norvasc 1.25
+Sortis 80
+Zocor 10
+Marevan Plus Forte
+Tritace Comp Forte
+Renitec Plus HCT
+Cozaar Comp Forte
+Zoloft 75
+Prozac 60
+Paxil 40
+Imodium Duo Comfort
+Ventolin Respirator N
+Prostamol Uno Forte Max
+Voltaren Emulgel Forte
+Claritine Allergy
+Zyrtec Allergy Od Azji
+Rennie Cool Mint
+Maalox Mini Max
+Spasmex Max Forte Max
+No-Spa Relax Max
+Clexane Duo Forte Max
+Novorapid FlexTouch Max
+Lantus Solostar Penfill Max
+Euthyrox 100 Henning
+Ventolin Respirator Syrop Max
+Seretide MultiDiskus Max
+Flixotide Nebules Max
+Crestor 40
+Lipanthyl 145
+Zomig Rapid Spray
+Maxigra Classic Max
+Viagra Ultra Max
+Apap Max
+Nurofen Max
+Aspirin Max
+Losec Max
+Amotaks Max
+Sumamed Max
+Cipronex Max
+Metformax Max
+Norvasc Max
+Sortis Max
+Zocor Max
+Marevan Max
+Tritace Max
+Renitec Max
+Cozaar Max
+Zoloft Max
+Prozac Max
+Paxil Max
+Imodium Max
+Ventolin Max
+Prostamol Max
+Voltaren Max Max
+Claritine Max
+Zyrtec Max
+Rennie Max
+Maalox Max Max
+Spasmex Max Max
+No-Spa Max Max
+Clexane Max
+Novorapid Max
+Lantus Max
+Euthyrox Max
+Ventolin Max Max
+Seretide Max
+Flixotide Max
+Crestor Max
+Lipanthyl Max
+Zomig Max
+Maxigra Max
+Viagra Max Max
+Apap Extra Max
+Nurofen Forte Max
+Aspirin Cardio Max
+Losec MUPS Max
+Amotaks Dis Max
+Sumamed Forte Max
+Cipronex 500 Max
+Metformax XR Max
+Norvasc 5 Max
+Sortis 20 Max
+Zocor Forte Max
+Marevan Plus Max
+Tritace Comp Max
+Renitec Plus Max
+Cozaar Comp Max
+Zoloft 50 Max
+Prozac 20 Max
+Paxil CR Max
+Imodium Plus Max
+Ventolin N Max
+Prostamol Uno Max Max
+Voltaren Max Emulgel
+Claritine Syrop Max
+Zyrtecset Max
+Rennie Soft Max
+Maalox Plus Max
+Spasmex Forte Max
+No-Spa Maxi Max
+Clexane Forte Max
+Novorapid FlexPen Max
+Lantus SoloStar Max
+Euthyrox 50 Max
+Ventolin Inhaler Max
+Seretide Evohaler Max
+Flixotide Diskus Max
+Crestor 10 Max
+Lipanthyl 200 Max
+Zomig Rapimelt Max
+Maxigra Go Max Max
+Viagra Connect Max
+Apap Junior Max
+Nurofen dla Dzieci Max
+Aspirin Protect Max
+Losec Control Max
+Amotaks 1g Max
+Sumamed Syrop Max
+Cipronex 250 Max
+Metformax 500 Max
+Norvasc 10 Max
+Sortis 40 Max
+Zocor 40 Max
+Marevan Duo Max
+Tritace Plus Max
+Renitec HCT Max
+Cozaar Plus Max
+Zoloft 100 Max
+Prozac 40 Max
+Paxil 20 Max
+Imodium Duo Max
+Ventolin Evohaler Max
+Prostamol Uno Forte Max Max
+Voltaren Max Max Max
+Claritine Rapid Max
+Zyrtec Allergy Max
+Rennie Fresh Max
+Maalox Max Max Max
+Spasmex Max Max Max
+No-Spa Max Max Max
+Clexane Duo Max
+Novorapid FlexTouch Max Max
+Lantus Solostar Penfill Max Max
+Euthyrox 75 Max
+Ventolin Syrop Max
+Seretide Accuhaler Max
+Flixotide Evohaler Max
+Crestor 5 Max
+Lipanthyl 100 Max
+Zomig Nasal Max
+Maxigra Classic Max Max
+Viagra Ultra Max Max
+Apap C Max
+Nurofen Express Max
+Aspirin Direct Max
+Losec Extra Max
+Amotaks Duo Max
+Sumamed Forte Syrop Max
+Cipronex 1000 Max
+Metformax 1000 Max
+Norvasc 2.5 Max
+Sortis 10 Max
+Zocor 20 Max
+Marevan Duo Forte Max
+Tritace Plus 5 Max
+Renitec HCT Forte Max
+Cozaar Plus Forte Max
+Zoloft 25 Max
+Prozac 10 Max
+Paxil 10 Max
+Imodium Duo Comfort Max
+Ventolin Respirator Max
+Apap HotMax
+Nurofen Max Forte
+Aspirin Plus
+Losec Fast
+Amotaks Max Duo
+Sumamed Forte Duo
+Cipronex Plus
+Metformax XR Plus
+Norvasc Extra
+Sortis Ultra
+Zocor Intense
+Marevan Super
+Tritace Duo Plus
+Renitec Max HCT
+Cozaar Ultra Plus
+Zoloft Maxima
+Prozac Optima
+Paxil Ultimate
+Imodium Advanced
+Ventolin Turbo
+Prostamol Duo
+Voltaren Extra Max
+Claritine Pro
+Zyrtec Max Pro
+Rennie Fresh Max Pro
+Maalox Plus Max Pro
+Spasmex Max Forte Pro
+No-Spa Maxi Plus
+Clexane Duo Pro
+Novorapid Ultra Flex
+Lantus SoloStar Opti
+Euthyrox Maxima
+Ventolin Respirator Max Pro
+Seretide MultiDiskus Ultra
+Flixotide Nebules Pro Max
+Crestor Max Ultra
+Lipanthyl Pro Max
+Zomig Extra Rapid
+Maxigra Go Plus Max
+Viagra Ultra Maxima
+Apap Super Junior
+Nurofen dla Dzieci Plus
+Aspirin Protect Pro
+Losec Control Duo
+Amotaks 1g Duo
+Sumamed Syrop Plus
+Cipronex 250 Extra
+Metformax 500 Plus
+Norvasc 10 Pro
+Sortis 40 Ultra
+Zocor 40 Maxima
+Marevan Duo Extra
+Tritace Plus Ultra
+Renitec HCT Pro Plus
+Cozaar Plus Ultra
+Zoloft 100 Maxima
+Prozac 40 Optima
+Paxil 20 Ultimate
+Imodium Duo Max Pro
+Ventolin Evohaler Turbo
+Prostamol Uno Forte Plus
+Voltaren Max Pro Max
+Claritine Rapid Ultra
+Zyrtec Allergy Max Pro
+Rennie Fresh Max Plus
+Maalox Max Maxima
+Spasmex Max Max Pro
+No-Spa Max Maxi Plus
+Clexane Duo Max Pro
+Novorapid FlexTouch Maxima
+Lantus Solostar Penfill Pro
+Euthyrox 75 Maxima
+Ventolin Syrop Max Pro
+Seretide Accuhaler Max Plus
+Flixotide Evohaler Maxima
+Crestor 5 Ultra
+Lipanthyl 100 Pro Max
+Zomig Nasal Plus
+Maxigra Classic Maxima
+Viagra Ultra Max Plus
+Apap C Plus
+Nurofen Express Max Pro
+Aspirin Direct Ultra
+Losec Extra Maxima
+Amotaks Duo Maxima
+Sumamed Forte Syrop Plus
+Cipronex 1000 Max Pro
+Metformax 1000 Plus
+Norvasc 2.5 Maxima
+Sortis 10 Ultra
+Zocor 20 Maxima
+Marevan Duo Forte Max
+Tritace Plus 5 Ultra
+Renitec HCT Forte Max Plus
+Cozaar Plus Forte Ultra
+Zoloft 25 Maxima
+Prozac 10 Maxima
+Paxil 10 Ultimate
+Imodium Duo Comfort Max Pro
+Ventolin Respirator Max Turbo
+Seractil Max
+Fusafungine Max
+Neosine Max
+Bioprazol Max
+Ibufen Max
+Eurespal Max
+Apap Forte Max
+Nurofen ColdMax
+Paracetamol Max
+Aspargin Max
+Pantoprazol Max
+Claritine Duo Max
+Coldrex Max
+Maxilase Max
+Uniflox Max
+Diprophos Max
+Nebilet Max
+Aktil Duo Max
+Nexium Max
+Omeprazol Max
+Espumisan Max
+Diphergan Max
+Olfen Max
+Elocom Max
+Vix Active Max
+Theraflu Max
+Tantum Verde Max
+Acenocumarol Max
+Efectin Max
+Xyzal Max
+Sumamed Syrop Max Pro
+Imuran Max
+Flector Max
+Clarinase Max
+Ventolin Syrop Max Pro
+Prostamol Max Plus
+Zoloft Maxima Pro
+Voltaren Max Pro Max
+Rennie Max Pro
+Maalox Max Maxima Pro
+Spasmex Max Max Pro
+No-Spa Max Maxi Plus Pro
+Clexane Max Pro
+Novorapid Maxima Pro
+Lantus Maxima Pro
+Euthyrox Maxima Pro
+Ventolin Max Max Turbo
+Seretide Max Ultra
+Flixotide Max Pro Max
+Crestor Max Ultra
+Lipanthyl Max Pro Max
+Zomig Max Pro
+Maxigra Maxima Pro Max
+Viagra Max Maxima Pro
+Apap HotMax Pro
+Nurofen Max Forte Pro
+Aspirin Plus Ultra
+Losec Fast Maxima
+Amotaks Max Duo Pro
+Sumamed Forte Duo Pro
+Cipronex Plus Ultra
+Metformax XR Plus Max
+Norvasc Extra Max
+Sortis Ultra Pro
+Zocor Intense Max
+Marevan Super Max
+Tritace Duo Plus Ultra
+Renitec Max HCT Pro
+Cozaar Ultra Plus Max
+Zoloft Maxima Pro Max
+Prozac Optima Max
+Paxil Ultimate Max
+Imodium Advanced Max
+Ventolin Turbo Max
+Prostamol Duo Max
+Voltaren Extra Max Max
+Claritine Pro Max
+Zyrtec Max Pro
+Rennie Fresh Max Pro
+Maalox Plus Max Pro
+Spasmex Max Forte Pro
+No-Spa Maxi Plus Pro
+Clexane Duo Pro Max
+Novorapid Ultra Flex Max
+Lantus SoloStar Opti Max
+Euthyrox Maxima Pro
+Ventolin Respirator Max Pro
+Seretide MultiDiskus Ultra Max
+Flixotide Nebules Pro Max
+Crestor Max Ultra Pro
+Lipanthyl Pro Max Max
+Zomig Extra Rapid Max
+Maxigra Go Plus Max Max
+Viagra Ultra Max Maxima Pro
+Apap Super Junior Max
+Nurofen dla Dzieci Plus Max
+Aspirin Protect Pro Ultra
+Losec Control Duo Max
+Amotaks 1g Duo Max
+Sumamed Syrop Plus Max
+Advil
+Tylenol
+Zyrtec
+Xanax
+Prozac
+Lipitor
+Nexium
+Prilosec
+Abilify
+Plavix
+Crestor
+Synthroid
+Singulair
+Cymbalta
+Viagra
+Cialis
+Levitra
+Ambien
+Adderall
+Ritalin
+Wellbutrin
+Effexor
+Zoloft
+Lexapro
+Celebrex
+Lyrica
+Neurontin
+Humira
+Remicade
+Enbrel
+Tamiflu
+Ventolin
+Advair
+Symbicort
+Flonase
+Allegra
+Claritin
+Pravachol
+Zocor
+Propecia
+Abilify
+Actonel
+Adderall XR
+Advair Diskus
+Aldactone
+Allegra-D
+Alphagan
+Ambien CR
+Amitiza
+Androgel
+Aricept
+Asacol
+Astelin
+Astepro
+Atacand
+Atarax
+Ativan
+Atripla
+Augmentin
+Avandia
+Avapro
+Avelox
+Azopt
+Benicar
+Boniva
+Botox
+Byetta
+Caduet
+Carafate
+Cardizem
+Catapres
+Celebrex
+CellCept
+Chantix
+Cialis
+Ciprodex
+Clarinex
+Cleocin
+Clomid
+Combivent
+Concerta
+Coreg
+Coumadin
+Cozaar
+Crestor
+Cymbalta
+Depakote
+Detrol
+Dexilant
+Differin
+Diovan
+Ditropan
+Dramamine
+Dulcolax
+Duragesic
+Dyazide
+Effexor XR
+Elavil
+Enablex
+Enbrel
+EpiPen
+Evista
+Exelon
+Fentanyl
+Focalin
+Fosamax
+Gabapentin
+Gleevec
+Humalog
+Humira
+Imitrex
+Imodium
+Inderal
+Invega
+Ipratropium
+Januvia
+Klonopin
+Lamictal
+Lamisil
+Lanoxin
+Lasix
+Levaquin
+Levoxyl
+Lexapro
+Lidoderm
+Lipitor
+Lisinopril
+Lomotil
+Lopressor
+Lotrel
+Lunesta
+Lyrica
+Maxalt
+Mestinon
+Methadone
+Methotrexate
+Metoprolol
+Mirapex
+Mirena
+Namenda
+Naprosyn
+Nasacort
+Nasonex
+Neurontin
+Nexium
+Niaspan
+Nicoderm
+Nizoral
+Norvasc
+Nuvaring
+Ocella
+Olanzapine
+Omeprazole
+Omnicef
+OxyContin
+Patanol
+Paxil
+Plavix
+Ponstel
+Pravachol
+Pristiq
+ProAir
+Propecia
+Protonix
+Provigil
+Pulmicort
+Quillivant
+Relpax
+Requip
+Restasis
+Ritalin
+Risperdal
+Rozerem
+Seroquel
+Singulair
+Skelaxin
+Sonata
+Spiriva
+Strattera
+Suboxone
+Sudafed
+Synthroid
+Tamiflu
+Topamax
+Toprol-XL
+Travatan
+Triamterene
+Tricor
+Trileptal
+Tylenol with Codeine
+Ultram
+Valium
+Valtrex
+Vasotec
+Ventolin
+Vesicare
+Vicodin
+Victoza
+Viibryd
+Vimpat
+Vioxx
+Vivelle-Dot
+Voltaren
+Vyvanse
+Wellbutrin
+Xalatan
+Xanax
+Xarelto
+Xeloda
+Xenical
+Xolair
+Xopenex
+Xyrem
+Yasmin
+Yaz
+Zantac
+Zestril
+Zetia
+Zithromax
+Zocor
+Zofran
+Zoloft
+Zomig
+Zovirax
+Zyprexa
+Zyrtec
