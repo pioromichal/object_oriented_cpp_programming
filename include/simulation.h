@@ -24,6 +24,10 @@ private:
     Pharmacy pharmacy;
     Names namesData;
     Medicines medicineData;
+    std::string& randomName();
+    std::string& randomSurname();
+    std::string& randomMedicineName();
+
 public:
     Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients, ifstream &firstNames,
                ifstream &lastNames, ifstream &medicineNames);
