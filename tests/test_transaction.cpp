@@ -28,8 +28,6 @@ TEST_CASE("transaction simple tests", "[transaction]") {
     ZikoInventory.addNewMedicine(ptr5);
     std::shared_ptr<Medicine> ptr6 = std::make_unique<Ointment>("No in magazine", Affliction::Allergy, ActiveSubstance::Metamizole, 200, Price(30, 50), 0, 500);
     ZikoInventory.addNewMedicine(ptr6);
-    std::shared_ptr<Medicine> ptr7 = std::make_unique<Tablets>("Tablets3", Affliction::Rash, ActiveSubstance::Ibuprofen, 560, Price(23, 87), 100, 20);
-    ZikoInventory.addNewMedicine(ptr7);
     Counter::resetIdNumbering();
 
     std::unique_ptr<Counter>  counter1 = std::make_unique<Counter>(true);
@@ -56,6 +54,8 @@ TEST_CASE("transaction simple tests", "[transaction]") {
         CHECK(ZikoInventory.howManyInMagazine(ptr2) == 98);
         CHECK(ZikoInventory.howManyInMagazine(ptr3) == 96);
         CHECK(ZikoInventory.howManyInMagazine(ptr4) == 99);
+        CHECK(ZikoInventory.howManyInMagazine(ptr5) == 3);
+        CHECK(ZikoInventory.howManyInMagazine(ptr6) == 0);
 
         CHECK(JansTransaction->getRemainingTime() == 2);
         CHECK_FALSE(JansTransaction->isFinished());
@@ -78,7 +78,7 @@ TEST_CASE("transaction simple tests", "[transaction]") {
     SECTION("testing transaction with finding subtitutes") {
         ShoppingList PiotrsList;
         PiotrsList.addMedicineToList(ptr3, 2);
-        //PiotrsList.addMedicineToList(ptr1, 5);
+        PiotrsList.addMedicineToList(ptr1, 5);
         
         std::unique_ptr<Client> Piotr = std::make_unique<IndividualClient>("Piotr", "Nowak", PiotrsList, 1);
 
@@ -87,11 +87,20 @@ TEST_CASE("transaction simple tests", "[transaction]") {
         std::unique_ptr<Transaction> PiotrsTransaction = std::make_unique<Transaction>(ZikoInventory, std::move(Piotr), counter2);
 
         CHECK(counter2->isOccupied());
-        CHECK(PiotrsTransaction->getNettoPrice() == Price(50, 60));
-        CHECK(PiotrsTransaction->getBruttoPrice() == Price(62, 23));
-        CHECK(PiotrsTransaction->getTaxPrice() == Price(11, 63));
+        CHECK(PiotrsTransaction->getNettoPrice() == Price(139, 75));
+        CHECK(PiotrsTransaction->getBruttoPrice() == Price(171, 89));
+        CHECK(PiotrsTransaction->getTaxPrice() == Price(32, 14));
+        CHECK(ZikoInventory.howManyInMagazine(ptr1) == 95);
         CHECK(ZikoInventory.howManyInMagazine(ptr2) == 98);
         CHECK(ZikoInventory.howManyInMagazine(ptr3) == 100);
+        CHECK(ZikoInventory.howManyInMagazine(ptr4) == 100);
+        CHECK(ZikoInventory.howManyInMagazine(ptr5) == 3);
+        CHECK(ZikoInventory.howManyInMagazine(ptr6) == 0);
+        CHECK(PiotrsTransaction->getRemainingTime() == 3);
+        CHECK_FALSE(PiotrsTransaction->isFinished());
+
+        PiotrsTransaction->operator--();
+        
         CHECK(PiotrsTransaction->getRemainingTime() == 2);
         CHECK_FALSE(PiotrsTransaction->isFinished());
 
@@ -112,8 +121,8 @@ TEST_CASE("transaction simple tests", "[transaction]") {
 
     SECTION("testing transaction with lack of wanted medicines") {
         ShoppingList MarcinsList;
+        MarcinsList.addMedicineToList(ptr6, 2);
         MarcinsList.addMedicineToList(ptr5, 5);
-        //MarcinsList.addMedicineToList(ptr6, 2);
         std::unique_ptr<Client> Marcin = std::make_unique<BusinessClient>("Marcin", "Nowakowski", MarcinsList, 0);
         
         CHECK_FALSE(counter2->isOccupied());
@@ -122,11 +131,20 @@ TEST_CASE("transaction simple tests", "[transaction]") {
 
 
         CHECK(counter2->isOccupied());
-        CHECK(MarcinsTransaction->getNettoPrice() == Price(50, 60));
-        CHECK(MarcinsTransaction->getBruttoPrice() == Price(62, 23));
-        CHECK(MarcinsTransaction->getTaxPrice() == Price(11, 63));
+        CHECK(MarcinsTransaction->getNettoPrice() == Price(57, 45));
+        CHECK(MarcinsTransaction->getBruttoPrice() == Price(62, 04));
+        CHECK(MarcinsTransaction->getTaxPrice() == Price(4, 59));
+        CHECK(ZikoInventory.howManyInMagazine(ptr1) == 100);
+        CHECK(ZikoInventory.howManyInMagazine(ptr2) == 100);
+        CHECK(ZikoInventory.howManyInMagazine(ptr3) == 100);
+        CHECK(ZikoInventory.howManyInMagazine(ptr4) == 100);
         CHECK(ZikoInventory.howManyInMagazine(ptr5) == 0);
-        CHECK(ZikoInventory.howManyInMagazine(ptr7) == 98);
+        CHECK(ZikoInventory.howManyInMagazine(ptr6) == 0);
+        CHECK(MarcinsTransaction->getRemainingTime() == 3);
+        CHECK_FALSE(MarcinsTransaction->isFinished());
+
+        MarcinsTransaction->operator--();
+
         CHECK(MarcinsTransaction->getRemainingTime() == 2);
         CHECK_FALSE(MarcinsTransaction->isFinished());
 
