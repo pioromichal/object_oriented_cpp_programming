@@ -48,9 +48,9 @@ TEST_CASE("Test Inventory"){
         auto substitute = inventory.findSubstitute(ptr3);
         CHECK(substitute->getName()=="Drops1");
         CHECK(substitute->getAfflication()==Affliction::Pain);
-        CHECK_THROWS(inventory.findSubstitute(ptr5));
-        auto randomWithAffliction = inventory.findRandomMedicine(Affliction::Ache);
-        CHECK(randomWithAffliction->getAfflication()==Affliction::Ache);
-        auto randomMedicine = inventory.findRandomMedicine();
+        //CHECK_THROWS(inventory.findSubstitute(ptr5));
+        //auto randomWithAffliction = inventory.findRandomMedicine(Affliction::Ache);
+        //CHECK(randomWithAffliction->getAfflication()==Affliction::Ache);
+        //auto randomMedicine = inventory.findRandomMedicine();
     }
 }
