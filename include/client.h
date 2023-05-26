@@ -32,7 +32,7 @@ class Client {
 
 		void replaceMedicineOnList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
 		void addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, unsigned numberOfMedicines);
-		void removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr);
+		std::list<ShoppingItem>::iterator removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr);
 		void changeMedcineAmount(std::shared_ptr<Medicine> medicinePtr, unsigned newNumberOfMedicines);
 
 		Price calculateBruttoPrice() const;

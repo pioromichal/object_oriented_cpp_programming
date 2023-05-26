@@ -38,7 +38,7 @@ void Inventory::pickMedicine(const std::shared_ptr<Medicine> &medicine) {
 std::shared_ptr<Medicine> Inventory::findRandomMedicine() {
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<int> distributionAffliction(0,(int)Affliction::Count);
+    std::uniform_int_distribution<int> distributionAffliction(0,(int)Affliction::Count - 1);
     auto affliction = static_cast<Affliction>(distributionAffliction(rng));
     return findRandomMedicine(affliction);
 }
@@ -46,7 +46,7 @@ std::shared_ptr<Medicine> Inventory::findRandomMedicine() {
 std::shared_ptr<Medicine> Inventory::findRandomMedicine(Affliction affliction) {
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<int> distributionMedicine(0,inventory[affliction]->size());
+    std::uniform_int_distribution<int> distributionMedicine(0,inventory[affliction]->size()-1);
     auto it = inventory[affliction]->begin();
     std::advance(it,distributionMedicine(rng));
     return *it;
