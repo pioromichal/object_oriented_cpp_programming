@@ -57,8 +57,8 @@ void Client::addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, unsigne
 	shoppingList.addMedicineToList(newMedicinePtr, numberOfMedicines);
 }
 
-void Client::removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr) {
-	shoppingList.removeMedicineFromList(oldMedicinePtr);
+std::list<ShoppingItem>::iterator Client::removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr) {
+	return shoppingList.removeMedicineFromList(oldMedicinePtr);
 }
 
 void Client::changeMedcineAmount(std::shared_ptr<Medicine> medicinePtr, unsigned newNumberOfMedicines) {

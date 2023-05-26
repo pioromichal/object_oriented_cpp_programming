@@ -18,13 +18,13 @@ void ShoppingList::addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, u
 	totalNettoPrice += newMedicinePtr->calculatePrice() * newNumberOfMedicines;
 }
 
-void ShoppingList::removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr) {
+std::list<ShoppingItem>::iterator ShoppingList::removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr) {
 	auto it = std::find_if(medicinesList.begin(), medicinesList.end(), [oldMedicinePtr](const ShoppingItem& medicine) {
 		return medicine.getMedicinePtr() == oldMedicinePtr;
 		});
 	if (it != medicinesList.end()) {
 		totalNettoPrice -= it->calculateTotalPrice();
-		medicinesList.erase(it);
+		return medicinesList.erase(it);
 	}
 	else {
 		throw Exceptions::MedicineDoesntExistOnList(oldMedicinePtr->getName());
