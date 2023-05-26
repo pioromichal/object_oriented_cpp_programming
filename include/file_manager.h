@@ -6,20 +6,15 @@
 #include <vector>
 #include <fstream>
 
-struct Names{
-    std::vector<std::string> firstNames;
-    int fLength = 0;
-    std::vector<std::string> lastNames;
-    int lLength = 0;
-};
 
 class FileManager {
 private:
     static std::ifstream verifyPath(const std::string&);
     static std::string arguments(int argc, char** argv);
-    static Names namesFromFile(std::ifstream& first, std::ifstream& last);
 public:
-    static Simiulation simulationFromJson(int argc, char** argv);
+    static Simulation simulationFromJson(int argc, char** argv);
+    static Names namesFromFile(std::ifstream& first, std::ifstream& last);
+    static Medicines medicineNamesFromFile(std::ifstream& medicineFile);
 };
 
 

@@ -5,30 +5,34 @@
 #include <algorithm>
 using json = nlohmann::json;
 
-Simiulation FileManager::simulationFromJson(int argc, char **argv) {
-
+Simulation FileManager::simulationFromJson(int argc, char **argv) {
     std::string path  = arguments(argc,argv);
     std::ifstream jsonFile(path);
     if(!jsonFile.is_open()){
+        //TODO custom exception
         throw std::invalid_argument("Failed to open a file!");
     }
-    //Prawdopodobnie trzeba to otoczyć catchem sprawdzając czy dane istnieją w JSON
+    //TODO Prawdopodobnie trzeba to otoczyć catchem sprawdzając czy dane istnieją w JSON
     json data = json::parse(jsonFile);
     std::ifstream firstNames = verifyPath(data["pathToFirstNameList"]);
     std::ifstream lastNames = verifyPath(data["pathToLastNameList"]);
     std::ifstream medicineNames = verifyPath(data["pathToMedicineNameList"]);
     int nTurns = data["nTurns"];
+    //TODO porównać te liczby:
     int nCounters = data["nCounters"];
     int nOpenedCounters = data["nOpenedCounters"];
-    Names names = namesFromFile(firstNames,lastNames);
+    int nStartingClients = data["nStartingClients"];
+    int nMedicines = data["nMedicinesToCreate"];
+    Simulation simulation(nTurns,nMedicines, nCounters,nOpenedCounters,nStartingClients,firstNames,lastNames,medicineNames);
     firstNames.close();
     lastNames.close();
+    return simulation;
 }
 
 std::ifstream FileManager::verifyPath(const std::string& path) {
     std::ifstream file(path);
     if(!file.is_open()){
-        throw std::invalid_argument("Failed to open a file!"+path);
+        throw std::invalid_argument("Failed to open a file! "+path);
         exit(2);
     }
     else{
@@ -69,6 +73,21 @@ Names FileManager::namesFromFile(std::ifstream& first, std::ifstream& last) {
     while (std::getline(last, line)){
         line.erase(remove(line.begin(), line.end(), '\r'), line.end());
         result.lastNames.push_back(line);}
+    return result;
+}
+
+Medicines FileManager::medicineNamesFromFile(ifstream &medicineFile) {
+    Medicines result;
+    std::string line;
+    while (std::getline(medicineFile, line))
+        ++result.length;
+    result.medicineNames.reserve(result.length);
+    medicineFile.clear();
+    medicineFile.seekg(0);
+    while (std::getline(medicineFile,line)){
+        line.erase(remove(line.begin(), line.end(), '\r'), line.end());
+        result.medicineNames.push_back(line);
+    }
     return result;
 }
 
