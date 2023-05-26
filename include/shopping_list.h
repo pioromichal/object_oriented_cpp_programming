@@ -15,7 +15,7 @@ public:
 	ShoppingList();
 
 	void addMedicineToList(std::shared_ptr<Medicine> newMedicinePtr, unsigned newNumberOfMedicines);
-	void removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr);
+	std::list<ShoppingItem>::iterator removeMedicineFromList(std::shared_ptr<Medicine> oldMedicinePtr);
 	void replaceMedicineOnList(std::shared_ptr<Medicine> oldMedicinePtr, std::shared_ptr<Medicine> newMedicinePtr);
 	void changeMedcineAmount(std::shared_ptr<Medicine> medicinePtr, unsigned newNumberOfMedicines);
 
