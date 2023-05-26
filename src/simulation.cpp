@@ -11,11 +11,23 @@ Simulation::Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCou
 
     for (int i = 0; i < nStartingClients; i++) {
         //TODO function generating data from namesData
-        pharmacy.pushNewClient("place", "holder");
+        pharmacy.pushNewClient(randomName(), randomSurname());
     }
 
     for (int i = 0; i < nMedicines; i++) {
         //TODO function generating data from medicineData
-        pharmacy.addRandomMedicine("placeHolder");
+        pharmacy.addRandomMedicine(randomMedicineName());
     }
+}
+
+std::string &Simulation::randomName() {
+    return (std::string &) "Place";
+}
+
+std::string &Simulation::randomSurname() {
+    return (std::string &) "holder";
+}
+
+std::string &Simulation::randomMedicineName() {
+    return (std::string &) "Hatered";
 }
