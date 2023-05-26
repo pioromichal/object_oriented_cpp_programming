@@ -11,7 +11,6 @@ private:
     void addMedicine(std::unique_ptr<Medicine>);
 public:
     Inventory();
-
     std::shared_ptr<Medicine> findSubstitute(const std::shared_ptr<Medicine>& medicine);
     std::shared_ptr<Medicine> findGeneralSubstitute(const std::shared_ptr<Medicine>& medicine);
 
@@ -28,9 +27,7 @@ public:
 
     int numberOfMedicines(Affliction affliction);
 
-#ifdef TESTING_ENV
     void addNewMedicine(std::shared_ptr<Medicine> medicine);
-#endif
 
 };
 

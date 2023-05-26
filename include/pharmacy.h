@@ -5,10 +5,26 @@
 #ifndef PROI_23L_101_APTEKA_PHARMACY_H
 #define PROI_23L_101_APTEKA_PHARMACY_H
 
+#include "inventory.h"
+#include "clients_queue.h"
+#include "counters_list.h"
+// All medicines:
+#include "capsules.h"
+#include "drops.h"
+#include "ointment.h"
+#include "powders.h"
+#include "syrup.h"
+#include "tablets.h"
 
 class Pharmacy {
 private:
-// Wykorzystać Inventory
+    Inventory inventory;
+    ClientsQueue queue;
+    CountersList counters;
+public:
+    Pharmacy(int nCounters, int nOpenedCounters);
+    void addRandomMedicine(std::string name);
+    void pushNewClient(std::string firstName,std::string lastName);
 };
 
 
