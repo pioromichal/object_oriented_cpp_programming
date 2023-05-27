@@ -77,18 +77,6 @@ void Transaction::randomlyFindSubstitute(std::list<ShoppingItem>::iterator medic
 	}
 }
 
-void Transaction::manageLackOfMedicine(std::list<ShoppingItem>::iterator medicineOnListIt) {
-	unsigned soldAmount = pharmacyIneventory.howManyInMagazine(medicineOnListIt->getMedicinePtr());
-	unsigned leftAmount = medicineOnListIt->getNumberOfMedicines() - soldAmount;
-
-	pharmacyIneventory.pickMedicine(medicineOnListIt->getMedicinePtr(), soldAmount);
-	supportedClientPtr->changeMedcineAmount(medicineOnListIt->getMedicinePtr(), soldAmount);
-
-	//loger - sprzedano jak¹œ iloœæ leków 
-	
-}
-
-
 unsigned Transaction::getRemainingTime() const {
 	return remainingTime;
 }
