@@ -1,4 +1,5 @@
 #include "../include/clients_queue.h"
+#include "../include/exceptions.h"
 
 ClientsQueue::ClientsQueue() : clientsPtrsQueue(std::queue<std::unique_ptr<Client>> {}) {}
 
@@ -12,7 +13,7 @@ void ClientsQueue::pushIndividualClient(std::string name, std::string surname, S
 
 std::unique_ptr<Client> ClientsQueue::popClient() {
     if (clientsPtrsQueue.empty()) {
-        return nullptr;
+        throw Exceptions::ClientsQueueIsAlreadyEmpty();
     }
     std::unique_ptr<Client> clientPtr = std::move(clientsPtrsQueue.front());
     clientsPtrsQueue.pop();
