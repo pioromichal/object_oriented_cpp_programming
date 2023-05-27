@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-CountersList::CountersList(unsigned int numberOfCounters, unsigned char openedCounters):openedCounters(openedCounters) {
+CountersList::CountersList(unsigned int numberOfCounters, unsigned char openedCounters): nOpenedCounters(openedCounters),nAllCounters(numberOfCounters) {
     if(numberOfCounters<openedCounters){
         throw std::invalid_argument("You cannot open more counters than there is in the pharmacy");
     }
@@ -23,7 +23,7 @@ std::unique_ptr<Counter>& CountersList::findLongestWorking() {
 }
 
 unsigned char CountersList::getOpenedCounters() const {
-    return openedCounters;
+    return nOpenedCounters;
 }
 
 void CountersList::addCounter(bool openCounter) {
@@ -51,6 +51,7 @@ void CountersList::openCounter(unsigned int id) {
     for(auto &counter:setCounters){
         if(counter->getId()==id){
             counter->openCounter();
+            nOpenedCounters++;
             return;
         }
     }
@@ -63,6 +64,7 @@ void CountersList::closeCounter(unsigned int id) {
     for(auto &counter:setCounters){
         if(counter->getId()==id){
             counter->closeCounter();
+            nOpenedCounters--;
             return;
         }
     }
@@ -77,4 +79,17 @@ std::unique_ptr<Counter> &CountersList::getCounter(unsigned int id) {
             return const_cast<std::unique_ptr<Counter> &>(counter);
         }
     }
+}
+
+unsigned int CountersList::getAllCounters() const {
+    return nAllCounters;
+}
+
+std::unique_ptr<Counter> &CountersList::getOpenCounter() {
+    for (auto &counter: setCounters) {
+        if (counter->isOpened() && !counter->isOccupied()) {
+            return const_cast<std::unique_ptr<Counter> &>(counter);
+        }
+    }
+    throw std::invalid_argument("No opened counters");
 }
