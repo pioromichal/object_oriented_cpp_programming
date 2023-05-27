@@ -11,8 +11,8 @@ class CountersList {
 private:
     std::set<std::unique_ptr<Counter>> setCounters;
 
-    unsigned char openedCounters;
-
+    unsigned char nOpenedCounters;
+    unsigned int nAllCounters;
     void addCounter(bool openCounter);
 public:
     CountersList(unsigned numberOfCounters, unsigned char openedCounters);
@@ -24,6 +24,10 @@ public:
     void closeCounter(unsigned id);
 
     unsigned char getOpenedCounters() const;
+
+    unsigned int getAllCounters() const;
+
+    std::unique_ptr<Counter>& getOpenCounter();
 
     std::unique_ptr<Counter>& getCounter(unsigned id);
 
