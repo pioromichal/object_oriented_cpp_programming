@@ -1,0 +1,11 @@
+{
+  "nTurns":100,
+  "nCounters": 10,
+  "nOpenedCounters":7,
+  "nStartingClients": 14,
+  "nMedicinesToCreate": 300,
+  "pathToFirstNameList": "names.txt",
+  "pathToLastNameList": "surnames.txt",
+  "pathToMedicineNameList": "medicines_names.txt",
+  "outputPath": ""
+}

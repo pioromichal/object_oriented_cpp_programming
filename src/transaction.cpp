@@ -3,8 +3,8 @@
 #include <chrono>
 #include <random>
 
-Transaction::Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client>& supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr)
-	: pharmacyIneventory(pharmacyIneventory), supportedClientPtr(supportedClientPtr), currentCounterPtr(currentCounterPtr), remainingTime(0), nettoPrice(Price()), bruttoPrice(Price()), taxPrice(Price()) {
+Transaction::Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client> supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr)
+	: pharmacyIneventory(pharmacyIneventory), supportedClientPtr(std::move(supportedClientPtr)), currentCounterPtr(currentCounterPtr), remainingTime(0), nettoPrice(Price()), bruttoPrice(Price()), taxPrice(Price()) {
 	if (currentCounterPtr->isOccupied()) {
 	
 	}
@@ -76,18 +76,6 @@ void Transaction::randomlyFindSubstitute(std::list<ShoppingItem>::iterator medic
 		}
 	}
 }
-
-void Transaction::manageLackOfMedicine(std::list<ShoppingItem>::iterator medicineOnListIt) {
-	unsigned soldAmount = pharmacyIneventory.howManyInMagazine(medicineOnListIt->getMedicinePtr());
-	unsigned leftAmount = medicineOnListIt->getNumberOfMedicines() - soldAmount;
-
-	pharmacyIneventory.pickMedicine(medicineOnListIt->getMedicinePtr(), soldAmount);
-	supportedClientPtr->changeMedcineAmount(medicineOnListIt->getMedicinePtr(), soldAmount);
-
-	//loger - sprzedano jak¹œ iloœæ leków 
-	
-}
-
 
 unsigned Transaction::getRemainingTime() const {
 	return remainingTime;
