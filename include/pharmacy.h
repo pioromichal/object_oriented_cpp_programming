@@ -1,7 +1,3 @@
-//
-// Created by damaia on 31.03.23.
-//
-
 #include <list>
 #include "inventory.h"
 #include "counters_list.h"
@@ -28,20 +24,10 @@ private:
     Inventory inventory;
     ClientsQueue queue;
     CountersList counters;
-    static Affliction randomAffliction();
-    static ActiveSubstance randomActiveSubstance();
-    static unsigned  randomMiligrams();
-    static Price randomPrice();
-    static unsigned randomAmount();
-    static unsigned randomNumber();
-    static unsigned randomVolume();
-    static unsigned randomSachets();
-    static float randomArguability();
-    static ShoppingList randomShoppingList();
+
 public:
     Pharmacy(int nCounters, int nOpenedCounters);
-    void addRandomMedicine(std::string& name);
-    void pushNewClient(std::string& firstName,std::string& lastName);
+    void addMedicineToInventory(std::shared_ptr<Medicine> medicine);
 	void pushBusinessClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions);
 	void pushIndividualClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions);
 	std::shared_ptr<Medicine> findRandomMedicine();

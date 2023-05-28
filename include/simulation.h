@@ -23,29 +23,38 @@ struct Medicines{
 
 class Simulation {
 private:
-    int numberOfTurns;
-    unsigned maksNumOfTurns;
+    unsigned numberOfTurns;
+    unsigned maxNumOfTurns;
     Pharmacy pharmacy;
     Names namesData;
     Medicines medicineData;
     std::list<std::unique_ptr<Transaction>> currentTransactions;
-    std::string& randomName();
-    std::string& randomSurname();
-    std::string& randomMedicineName();
 
-public:
-    Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients, ifstream &firstNames,
-               ifstream &lastNames, ifstream &medicineNames);
-    void simulate();
     void pushNewClients();
     void assigneClientsToWindows();
     void manageCountersOpening();
     void pushRandomClient();
+    void addRandomMedicineToInventory();
     ShoppingList generateRandomShoppingList();
-    std::string generateRandomName();
-    std::string generateRandomSurname();
-    void decrementTransactionsAndReleaseCounters();
+    std::string& generateRandomName();
+    std::string& generateRandomSurname();
+    std::string& generateRandomMedicineName();
+    Affliction generateRandomAffliction();
+    ActiveSubstance generateRandomActiveSubstance();
+    unsigned generateRandomVolume();
+    unsigned generateRandomNumber();
+    unsigned generateRandomSachets();
+    unsigned generateRandomAmount();
+    unsigned generateRandomMiligrams();
+    Price generateRandomPrice();
+    void decrementTransactions();
+    void releaseCounters();
     Simulation& operator++();
+
+public:
+    Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients, ifstream &firstNames,
+               ifstream &lastNames, ifstream &medicineNames);
+    void run();
 };
 
 
