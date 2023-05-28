@@ -91,9 +91,7 @@ std::shared_ptr<Medicine> Inventory::findGeneralSubstitute(const std::shared_ptr
     return nullptr;
 }
 
-#ifdef TESTING_ENV
 void Inventory::addNewMedicine(std::shared_ptr<Medicine> medicine) {
     Affliction affliction = medicine->getAfflication();
     inventory[affliction]->insert(std::move(medicine));
 }
-#endif
