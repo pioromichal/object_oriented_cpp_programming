@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <random>
 #include "inventory.h"
 #include "transaction.h"
 #include "pharmacy.h"
@@ -29,6 +30,7 @@ private:
     Names namesData;
     Medicines medicineData;
     std::list<std::unique_ptr<Transaction>> currentTransactions;
+    std::mt19937 generator;
 
     void pushNewClients();
     void assigneClientsToWindows();

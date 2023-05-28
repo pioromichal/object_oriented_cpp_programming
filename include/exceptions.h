@@ -10,8 +10,11 @@ namespace Exceptions {
     class MedicineDoesntExistOnList : public std::invalid_argument {
     public: MedicineDoesntExistOnList(const std::string nameOfMedicine);
     };
-    class ClientsQueueIsAlreadyEmpty : public std::invalid_argument {
+    class ClientsQueueIsAlreadyEmpty : public std::out_of_range {
     public: ClientsQueueIsAlreadyEmpty();
+    };
+    class SimulationFinishedEarlier : public std::exception {
+    public: SimulationFinishedEarlier();
     };
 }
 #endif

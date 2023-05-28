@@ -3,8 +3,8 @@
 #include <chrono>
 #include <random>
 
-Transaction::Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client>& supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr)
-	: pharmacyIneventory(pharmacyIneventory), supportedClientPtr(supportedClientPtr), currentCounterPtr(currentCounterPtr), remainingTime(0), nettoPrice(Price()), bruttoPrice(Price()), taxPrice(Price()) {
+Transaction::Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client> supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr)
+	: pharmacyIneventory(pharmacyIneventory), supportedClientPtr(std::move(supportedClientPtr)), currentCounterPtr(currentCounterPtr), remainingTime(0), nettoPrice(Price()), bruttoPrice(Price()), taxPrice(Price()) {
 	if (currentCounterPtr->isOccupied()) {
 	
 	}

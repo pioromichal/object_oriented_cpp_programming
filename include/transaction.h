@@ -9,7 +9,7 @@
 class Transaction {
 	private:
 		Inventory& pharmacyIneventory;
-		std::unique_ptr<Client>& supportedClientPtr;
+		std::unique_ptr<Client> supportedClientPtr;
 		std::unique_ptr<Counter>& currentCounterPtr;
 		unsigned remainingTime;
 		Price nettoPrice;
@@ -20,10 +20,9 @@ class Transaction {
 		void setStartingRemainingTime();
 		void manageShoppingList();
 		void randomlyFindSubstitute(std::list<ShoppingItem>::iterator medicineOnListIt);
-		void manageLackOfMedicine(std::list<ShoppingItem>::iterator medicineOnListIt);
 
 	public:
-		Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client>& supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr);
+		Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client> supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr);
 		bool isFinished() const;
 		Transaction& operator--();
 		unsigned getRemainingTime() const;
