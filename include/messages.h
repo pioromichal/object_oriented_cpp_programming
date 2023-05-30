@@ -16,6 +16,7 @@ private:
     inline static const std::string endSimulationTag = " [End] ";
 
 public:
+    static std::string simulationBegins(int counter,int openedCounter, int nClients);
     static std::string noClientsInQueue();
     static std::string newClient(const std::unique_ptr<Client>& client);
     static std::string noMoreOpenCounters(unsigned numOfActiveCounters);
@@ -28,6 +29,7 @@ public:
     static std::string foundSubstitute(unsigned oldMedicineId, unsigned newMedicineId);
     static std::string finishedTransaction(std::unique_ptr<Client> &client, unsigned counterId);
     static std::string finishedTransactionOnEnd(std::unique_ptr<Client> &client, unsigned counterId);
+    static std::string sumUpSimulation(Price price,int clients);
 };
 
 

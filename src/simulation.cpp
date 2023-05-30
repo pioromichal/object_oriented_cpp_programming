@@ -21,6 +21,8 @@ Simulation::Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCou
     for (int i = 0; i < nStartingClients; i++) {
         pushRandomClient();
     }
+    moneySpent = Price(0,0);
+    logger<<Messages::simulationBegins(nCounters,nOpenedCounters,nStartingClients)<<std::endl;
 }
 
 void Simulation::run() {
@@ -30,6 +32,7 @@ void Simulation::run() {
             ++logger;
             this->operator++();
 		}
+        logger<<Messages::sumUpSimulation(moneySpent,clientsServed);
 	} 
 	catch (const Exceptions::SimulationFinishedEarlier& e) {
 		//logger - brak kilent�w do obs�ugi
@@ -82,6 +85,8 @@ void Simulation::assigneClientsToWindows() {
 		try {
 			currentTransactions.push_back(std::make_unique<Transaction>(pharmacy.getInventory(), pharmacy.popClient(), pharmacy.getOpenCounter()));
 			//logger - klient podszed� do okienka
+            moneySpent += currentTransactions.back()->getBruttoPrice();
+            clientsServed +=1;
 		}
 		catch (const Exceptions::ClientsQueueIsAlreadyEmpty& e) {
 			if (currentTransactions.empty()) {

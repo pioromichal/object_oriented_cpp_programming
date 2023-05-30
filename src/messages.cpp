@@ -73,3 +73,15 @@ std::string Messages::finishedTransactionOnEnd(std::unique_ptr<Client>& client, 
     std::string message = endSimulationTag + ss.str();
     return message;
 }
+
+std::string Messages::sumUpSimulation(Price price, int clients) {
+    std::ostringstream  ss;
+    ss<<endSimulationTag<<"After long day of work pharmacy closes after serving "<< clients<<" who bought goods for "<<price;
+    return ss.str();
+}
+
+std::string Messages::simulationBegins(int counter, int openedCounter, int nClients) {
+    std::ostringstream ss;
+    ss<<"Pharmacy opens its doors with "<<openedCounter<<" counters working out of "<<counter<<", "<<nClients<<" clients are already waiting outside";
+    return ss.str();
+}
