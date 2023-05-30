@@ -2,6 +2,7 @@
 #define PROI_23L_101_APTEKA_FILE_MANAGER_H
 #include "cxxopts.hpp"
 #include "simulation.h"
+#include "exceptions.h"
 #include <nlohmann/json.hpp>
 #include <vector>
 #include <fstream>
@@ -10,6 +11,7 @@
 class FileManager {
 private:
     static std::ifstream verifyPath(const std::string&);
+    static void verifyOutputPath(std::string &path);
     static std::string arguments(int argc, char** argv);
 public:
     static Simulation simulationFromJson(int argc, char** argv);

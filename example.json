@@ -7,5 +7,5 @@
   "pathToFirstNameList": "names.txt",
   "pathToLastNameList": "surnames.txt",
   "pathToMedicineNameList": "medicines_names.txt",
-  "outputPath": ""
+  "outputPath": "output.log"
 }

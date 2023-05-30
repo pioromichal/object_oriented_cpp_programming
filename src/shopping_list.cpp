@@ -64,7 +64,7 @@ void ShoppingList::changeMedcineAmount(std::shared_ptr<Medicine> medicinePtr, un
 }
 
 unsigned ShoppingList::getListSize() const {
-	return medicinesList.size();
+	return static_cast<unsigned>(medicinesList.size());
 }
 
 std::list<ShoppingItem>& ShoppingList::getMedicinesList() {

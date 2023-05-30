@@ -4,6 +4,8 @@
 #include "client.h"
 #include "counter.h"
 #include "inventory.h"
+#include "logger.h"
+#include "messages.h"
 #include <memory>
 
 class Transaction {
@@ -22,6 +24,7 @@ class Transaction {
 		void randomlyFindSubstitute(std::list<ShoppingItem>::iterator medicineOnListIt);
 
 	public:
+        static Logger* logger;
 		Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client> supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr);
 		bool isFinished() const;
 		Transaction& operator--();

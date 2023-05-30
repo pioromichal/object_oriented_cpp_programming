@@ -8,32 +8,38 @@
 #include <sstream>
 #include <algorithm>
 
-Simulation::Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients, ifstream &firstNames, ifstream &lastNames, ifstream &medicineNames) : 
-	maxNumOfTurns(nTurns), numberOfTurns(0), namesData(FileManager::namesFromFile(firstNames, lastNames)), medicineData(FileManager::medicineNamesFromFile(medicineNames)), pharmacy(nCounters, nOpenedCounters), currentTransactions(std::list<std::unique_ptr<Transaction>> {}) {
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+Simulation::Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients,
+                       std::string &outputPath, ifstream &firstNames, ifstream &lastNames, ifstream &medicineNames) :
+	maxNumOfTurns(nTurns), numberOfTurns(1), logger(outputPath), namesData(FileManager::namesFromFile(firstNames, lastNames)), medicineData(FileManager::medicineNamesFromFile(medicineNames)), pharmacy(nCounters, nOpenedCounters), currentTransactions(std::list<std::unique_ptr<Transaction>> {}) {
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	this -> generator = std::mt19937(seed);
 	for (int i = 0; i < nMedicines; i++) {
 		addRandomMedicineToInventory();
 	}
 
     for (int i = 0; i < nStartingClients; i++) {
-		pushRandomClient();
+        pushRandomClient();
     }
 }
 
 void Simulation::run() {
+	Transaction::logger = &logger;
 	try {
-		for (numberOfTurns; numberOfTurns < maxNumOfTurns; numberOfTurns++) {
-			this->operator++();
+		for (numberOfTurns; numberOfTurns <= maxNumOfTurns; numberOfTurns++) {
+            ++logger;
+            this->operator++();
 		}
 	} 
 	catch (const Exceptions::SimulationFinishedEarlier& e) {
-		//logger - brak kilentów do obs³ugi
+		//logger - brak kilentï¿½w do obsï¿½ugi
+        logger<<Messages::noClientsInQueue()<<std::endl;
 	}
+    currentTransactions.clear();
 }
 
 Simulation& Simulation::operator++() {
-	// 1. Przychodzenie klientów
+	// 1. Przychodzenie klientï¿½w
 	pushNewClients();
 	// 2. Przypisywanie do wolnych okienek
 	assigneClientsToWindows();
@@ -45,6 +51,8 @@ Simulation& Simulation::operator++() {
 	pharmacy.incrementCounters();
 	// 6. Zamykanie oraz otwieranie okienek
 	manageCountersOpening();
+
+
 	return *this;
 }
 
@@ -59,12 +67,13 @@ void Simulation::releaseCounters() {
 }
 
 void Simulation::pushNewClients() {	
-	std::geometric_distribution<int> geo_distribution(0.2);
+	std::geometric_distribution<int> geo_distribution(0.4);
 	int newClientsNum = geo_distribution(generator);
 	for (int i = 1; i <= newClientsNum; i++) {
 		pushRandomClient();
+        logger<<Messages::newClient(pharmacy.getNewestClient())<<std::endl;
 	}
-	//logger - przyszli jacyœ klienci
+	//logger - przyszli jacyï¿½ klienci
 }
 
 void Simulation::assigneClientsToWindows() {
@@ -72,18 +81,21 @@ void Simulation::assigneClientsToWindows() {
 	do {
 		try {
 			currentTransactions.push_back(std::make_unique<Transaction>(pharmacy.getInventory(), pharmacy.popClient(), pharmacy.getOpenCounter()));
-			//logger - klient podszed³ do okienka
+			//logger - klient podszedï¿½ do okienka
 		}
 		catch (const Exceptions::ClientsQueueIsAlreadyEmpty& e) {
 			if (currentTransactions.empty()) {
 				throw Exceptions::SimulationFinishedEarlier();
 			}
 			isOpenedCounter = false;
-			//logger - koniec klientów
+			//logger - koniec klientï¿½w
+            logger<<Messages::noClientsInQueue()<<std::endl;
 		}
 		catch (const std::invalid_argument& e) {
 			isOpenedCounter = false;
 			//logger - brak wolnych okienek
+            logger<< Messages::noMoreOpenCounters(pharmacy.getNumOfCounters())<<std::endl;
+
 		}
 	} while (isOpenedCounter);
 }
@@ -96,13 +108,15 @@ void Simulation::manageCountersOpening() {
 		if (bern_close_distribution(generator)) {
 			std::unique_ptr<Counter>& counterToClose = pharmacy.findLongestWorkingCounter();
 			if (!counterToClose->isOccupied()) {
+                logger<<Messages::closedCounter(counterToClose->getId(),counterToClose->getTimeOpened())<<std::endl;
 				counterToClose->closeCounter();
-				//logger - zamkniêto okienko
+				//logger - zamkniï¿½to okienko
 			}
 		} else {
 			for (int counterId = 1; counterId <= pharmacy.getNumOfCounters(); counterId++) {
 				if (!pharmacy.getCounter(counterId)->isOpened()) {
 					pharmacy.openCounter(counterId);
+                    logger<<Messages::openedCounter(counterId)<<std::endl;
 					//logger - otwarto okienko
 					return;
 				}
@@ -122,8 +136,6 @@ void Simulation::pushRandomClient() {
 }
 
 void Simulation::addRandomMedicineToInventory() {
-	
-	
 	std::uniform_int_distribution<int> uni_distribution(1, 6);
 	int randomMedicineType = uni_distribution(generator);
 	std::shared_ptr<Medicine> medicinePtr;
@@ -152,10 +164,10 @@ void Simulation::addRandomMedicineToInventory() {
 		//Tablets
 		medicinePtr = std::make_shared<Tablets>(generateRandomMedicineName(), generateRandomAffliction(), generateRandomActiveSubstance(), generateRandomMiligrams(), generateRandomPrice(), generateRandomAmount(), generateRandomNumber());
 		break;
-		//TODO throw some fancy exception
+
 	default:
 		medicinePtr = nullptr;
-		throw std::invalid_argument("Something went wrong here");
+		throw Exceptions::ProbabilityOutOfRange(randomMedicineType,6);
 
 	}
 	pharmacy.addMedicineToInventory(medicinePtr);
@@ -165,7 +177,7 @@ void Simulation::addRandomMedicineToInventory() {
 
 ShoppingList Simulation::generateRandomShoppingList() {
 	std::geometric_distribution<int> geo_list_distribution(0.5);
-	int shoppingListLength = geo_list_distribution(generator) + 1;
+	int shoppingListLength = geo_list_distribution(generator) + 2;
 	std::geometric_distribution<int> geo_item_distribution(0.3);
 	ShoppingList randomShoppingList;
 	for (int i = 1; i <= shoppingListLength; i++) {
@@ -232,7 +244,7 @@ unsigned Simulation::generateRandomMiligrams()
 
 Price Simulation::generateRandomPrice()
 {
-	std::lognormal_distribution<float> zlotys_distribution(4.5, 0.5);
+	std::lognormal_distribution<float> zlotys_distribution(3.7, 0.3);
 	std::lognormal_distribution<float> grosze_distribution(4, 0.4);
-	return Price(static_cast<unsigned>(zlotys_distribution(generator)), static_cast<unsigned>(grosze_distribution(generator)) + 1);
+	return Price(static_cast<unsigned>(zlotys_distribution(generator)), static_cast<unsigned>(abs(100 - grosze_distribution(generator))) + 1);
 }

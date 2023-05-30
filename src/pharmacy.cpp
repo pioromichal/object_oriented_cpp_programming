@@ -41,11 +41,11 @@ void Pharmacy::incrementCounters() {
 	counters.nextTurn();
 }
 
-void Pharmacy::pushBusinessClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions) {
+void Pharmacy::pushBusinessClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions) {
 	queue.pushBusinessClient(name, surname, shoppingList, probabilityOfActions);
 }
 
-void Pharmacy::pushIndividualClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions) {
+void Pharmacy::pushIndividualClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions) {
 	queue.pushIndividualClient(name, surname, shoppingList, probabilityOfActions);
 }
 
@@ -64,4 +64,8 @@ std::unique_ptr<Counter>& Pharmacy::getOpenCounter()
 
 std::unique_ptr<Client> Pharmacy::popClient() {
 	return queue.popClient();
+}
+
+const std::unique_ptr<Client> & Pharmacy::getNewestClient() {
+    return queue.getClientsPtrsQueue().back();
 }

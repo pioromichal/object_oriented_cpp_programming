@@ -1,20 +1,21 @@
 #include "../include/transaction.h"
-
+#include "../include/exceptions.h"
 #include <chrono>
 #include <random>
+
+Logger* Transaction::logger = nullptr;
 
 Transaction::Transaction(Inventory& pharmacyIneventory, std::unique_ptr<Client> supportedClientPtr, std::unique_ptr<Counter>& currentCounterPtr)
 	: pharmacyIneventory(pharmacyIneventory), supportedClientPtr(std::move(supportedClientPtr)), currentCounterPtr(currentCounterPtr), remainingTime(0), nettoPrice(Price()), bruttoPrice(Price()), taxPrice(Price()) {
 	if (currentCounterPtr->isOccupied()) {
-	
+		Exceptions::TransactionGotWrongCounter();
 	}
 	else {
 		currentCounterPtr->setIsOccupied(true);
 	}
 
 	setStartingRemainingTime();
-
-	//logger - podejœcie klienta
+    (*logger).operator<<(Messages::clientCameToCounter(this->supportedClientPtr->getId(), currentCounterPtr->getId(), this->supportedClientPtr->getShoppingList().getListSize()))<<std::endl;
 
 	manageShoppingList();
 	
@@ -47,14 +48,17 @@ void Transaction::manageShoppingList() {
 			remainingTime++;
 			unsigned soldAmount = pharmacyIneventory.howManyInMagazine(medicineOnListIt->getMedicinePtr());
 			if (soldAmount != 0) {
+                unsigned amountOfMedicine = medicineOnListIt->getNumberOfMedicines();
 				supportedClientPtr->changeMedcineAmount(medicineOnListIt->getMedicinePtr(), soldAmount);
 				pharmacyIneventory.pickMedicine(medicineOnListIt->getMedicinePtr(), soldAmount);
+                (*logger).operator<<(Messages::changedNumberOfMedicines(*medicineOnListIt,amountOfMedicine))<<std::endl;
 				medicineOnListIt++;
-				//logger - zmieniono iloœæ leków (czêœæ sprzedano)
+
 			} else {
 				medicineOnListIt = supportedClientPtr->removeMedicineFromList(medicineOnListIt->getMedicinePtr());
-				//logger - brak leku (nie sprzedano)
-			}
+                //logger - brak leku (nie sprzedano)
+                (*logger).operator<<(Messages::failedToSellMedicine(*medicineOnListIt))<<std::endl;
+            }
 		}
 	}
 }
@@ -69,11 +73,14 @@ void Transaction::randomlyFindSubstitute(std::list<ShoppingItem>::iterator medic
 		std::shared_ptr<Medicine> substitutePtr = pharmacyIneventory.findSubstitute(medicineOnListIt->getMedicinePtr());
 		if (substitutePtr == nullptr) {
 			//logger - nie znaleziono zamiennika
-		} else {
+            (*logger).operator<<(Messages::failedToFindSubstitute(*medicineOnListIt))<<std::endl;
+        } else {
+			unsigned idOfOldMedicine = medicineOnListIt->getMedicinePtr()->getId();
 			supportedClientPtr->replaceMedicineOnList(medicineOnListIt->getMedicinePtr(), substitutePtr);
-			medicineOnListIt->setMedicinePtr(substitutePtr);
+            medicineOnListIt->setMedicinePtr(substitutePtr);
 			//logger - znaleziono zamiennik
-		}
+            (*logger).operator<<(Messages::foundSubstitute(idOfOldMedicine,medicineOnListIt->getMedicinePtr()->getId()))<<std::endl;
+        }
 	}
 }
 
@@ -104,5 +111,10 @@ Transaction& Transaction::operator--() {
 
 Transaction::~Transaction() {
 	currentCounterPtr->setIsOccupied(false);
-	//logger - zakoñczono transakcjê
+	//logger - zakoï¿½czono transakcjï¿½
+    if(remainingTime==0){
+    (*logger).operator<<(Messages::finishedTransaction(supportedClientPtr,currentCounterPtr->getId()))<<std::endl;}
+    else{
+        (*logger).operator<<(Messages::finishedTransactionOnEnd(supportedClientPtr, currentCounterPtr->getId()))<<std::endl;
+    }
 }
