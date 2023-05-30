@@ -9,6 +9,8 @@
 #include "inventory.h"
 #include "transaction.h"
 #include "pharmacy.h"
+#include "logger.h"
+#include "messages.h"
 
 using std::ifstream;
 struct Names {
@@ -31,6 +33,7 @@ private:
     Medicines medicineData;
     std::list<std::unique_ptr<Transaction>> currentTransactions;
     std::mt19937 generator;
+    Logger logger;
 
     void pushNewClients();
     void assigneClientsToWindows();
@@ -54,8 +57,8 @@ private:
     Simulation& operator++();
 
 public:
-    Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients, ifstream &firstNames,
-               ifstream &lastNames, ifstream &medicineNames);
+    Simulation(int nTurns, int nMedicines, int nCounters, int nOpenedCounters, int nStartingClients,
+               std::string &outputPath, ifstream &firstNames, ifstream &lastNames, ifstream &medicineNames);
     void run();
 };
 

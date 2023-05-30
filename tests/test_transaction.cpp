@@ -11,8 +11,12 @@
 #include "../include/tablets.h"
 #include "../include/business_client.h"
 #include "../include/individual_client.h"
+#include "../include/logger.h"
 
 TEST_CASE("transaction simple tests", "[transaction]") {
+    std::string outputPath = "output.log";
+    Logger logger(outputPath);
+    Transaction::logger = &logger;
     Inventory ZikoInventory;
     Medicine::resetMedId();
     CHECK(ZikoInventory.numberOfMedicines() == 0);

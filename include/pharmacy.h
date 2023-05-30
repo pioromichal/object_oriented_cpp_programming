@@ -28,8 +28,8 @@ private:
 public:
     Pharmacy(int nCounters, int nOpenedCounters);
     void addMedicineToInventory(std::shared_ptr<Medicine> medicine);
-	void pushBusinessClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions);
-	void pushIndividualClient(std::string name, std::string surname, ShoppingList& shoppingList, float probabilityOfActions);
+	void pushBusinessClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions);
+	void pushIndividualClient(std::string name, std::string surname, ShoppingList shoppingList, float probabilityOfActions);
 	std::shared_ptr<Medicine> findRandomMedicine();
 	std::unique_ptr<Client> popClient();
 	CountersList& getCountersList();
@@ -41,6 +41,7 @@ public:
 	std::unique_ptr<Counter>& findLongestWorkingCounter();
 	void openCounter(unsigned id);
 	void incrementCounters();
+    const std::unique_ptr<Client> & getNewestClient();
 };
 
 

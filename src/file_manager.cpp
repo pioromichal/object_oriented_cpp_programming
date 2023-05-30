@@ -1,39 +1,52 @@
 #include <iostream>
-#include "../include/file_manager.h"
 #include <fstream>
 #include <stdexcept>
 #include <algorithm>
+#include <regex>
+#include "../include/file_manager.h"
+
 using json = nlohmann::json;
 
 Simulation FileManager::simulationFromJson(int argc, char **argv) {
     std::string path  = arguments(argc,argv);
     std::ifstream jsonFile(path);
     if(!jsonFile.is_open()){
-        //TODO custom exception
-        throw std::invalid_argument("Failed to open a file!");
+        throw Exceptions::WrongJSONPath(path);
     }
-    //TODO Prawdopodobnie trzeba to otoczyć catchem sprawdzając czy dane istnieją w JSON
-    json data = json::parse(jsonFile);
-    std::ifstream firstNames = verifyPath(data["pathToFirstNameList"]);
-    std::ifstream lastNames = verifyPath(data["pathToLastNameList"]);
-    std::ifstream medicineNames = verifyPath(data["pathToMedicineNameList"]);
-    int nTurns = data["nTurns"];
-    //TODO porównać te liczby:
-    int nCounters = data["nCounters"];
-    int nOpenedCounters = data["nOpenedCounters"];
-    int nStartingClients = data["nStartingClients"];
-    int nMedicines = data["nMedicinesToCreate"];
-    Simulation simulation(nTurns,nMedicines, nCounters,nOpenedCounters,nStartingClients,firstNames,lastNames,medicineNames);
-    firstNames.close();
-    lastNames.close();
-    return simulation;
+    try {
+        json data = json::parse(jsonFile);
+        std::ifstream firstNames = verifyPath(data["pathToFirstNameList"]);
+        std::ifstream lastNames = verifyPath(data["pathToLastNameList"]);
+        std::ifstream medicineNames = verifyPath(data["pathToMedicineNameList"]);
+        int nTurns = data["nTurns"];
+        int nCounters = data["nCounters"];
+        int nOpenedCounters = data["nOpenedCounters"];
+        if (nCounters < nOpenedCounters) {
+          throw Exceptions::IncorrectDataFromJSON();
+        }
+        int nStartingClients = data["nStartingClients"];
+        int nMedicines = data["nMedicinesToCreate"];
+        std::string outputPath = data["outputPath"];
+        verifyOutputPath(outputPath);
+
+        Simulation simulation(nTurns, nMedicines, nCounters, nOpenedCounters, nStartingClients, outputPath, firstNames,
+                              lastNames, medicineNames);
+        firstNames.close();
+        lastNames.close();
+        medicineNames.close();
+        jsonFile.close();
+        return simulation;
+    }
+    catch (json::type_error&){
+        std::cout<<"Failed to read data from the file"<<std::endl;
+        exit(2);
+    }
 }
 
 std::ifstream FileManager::verifyPath(const std::string& path) {
     std::ifstream file(path);
     if(!file.is_open()){
         throw std::invalid_argument("Failed to open a file! "+path);
-        exit(2);
     }
     else{
         return file;
@@ -89,5 +102,21 @@ Medicines FileManager::medicineNamesFromFile(ifstream &medicineFile) {
         result.medicineNames.push_back(line);
     }
     return result;
+}
+
+void FileManager::verifyOutputPath(std::string & path) {
+    std::regex logPattern(".*.log$");
+    std::regex directoryPattern("\/$");
+    bool isLog = std::regex_search(path,logPattern);
+    bool isDirectory = std::regex_search(path,directoryPattern);
+    if(isLog){
+        return;
+    }
+    else if(isDirectory){
+        path+="output.log";
+    }
+    else{
+        throw std::invalid_argument("wrong path to output");
+    }
 }
 
