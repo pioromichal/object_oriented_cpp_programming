@@ -34,6 +34,8 @@ private:
     std::list<std::unique_ptr<Transaction>> currentTransactions;
     std::mt19937 generator;
     Logger logger;
+    Price moneySpent;
+    int clientsServed = 0;
 
     void pushNewClients();
     void assigneClientsToWindows();
